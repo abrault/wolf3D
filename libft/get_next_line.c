@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-char		*extract_line(char **str)
+char	*extract_line(char **str)
 {
 	char			*ptr;
 	char			*ptr2;
@@ -73,8 +73,8 @@ int		readF(char *buff, int *ret, int *end)
 int		get_next_line(int const fd, char **line)
 {
 	static char		*stock = NULL;
-	int				end;
-	int				ret;
+	int			end;
+	int			ret;
 	char			buff[BUFF_SIZE + 1];
 
 	end = 2;

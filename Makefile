@@ -1,44 +1,50 @@
-#******************************************************************************#
+# **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aviala <aviala@student.42.fr>              +#+  +:+       +#+         #
+#    By: abrault <abrault@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2013/12/27 18:12:48 by aviala            #+#    #+#              #
-#    Updated: 2013/12/27 23:18:37 by aviala           ###   ########.fr        #
+#    Created: 2014/01/02 13:50:21 by abrault           #+#    #+#              #
+#    Updated: 2014/01/03 16:09:47 by abrault          ###   ########.fr        #
 #                                                                              #
-#******************************************************************************#
+# **************************************************************************** #
 
+NAME = wolf3D
 
-CC = clang
-LD = $(CC)
-CFLAGS = -Wall -c -std=c89
-LDFLAGS = `SDL2/bin/sdl2-config --cflags --libs`
-NAME = SDL
+SRC = main.c
 
-all: SDL2 $(NAME)
+LIB = libft/libft.a
 
-$(NAME): main.o
-	$(CC) $(LDFLAGS) -L./libft/ -lft $< -o $@
+LIB_INC = libft/includes/ -I/usr/X11R6/include
 
-main.o: main.c
-	$(CC) $(LDFLAGS) $(CFLAGS) -L./libft/ -lft $< -o $@
+LIB_DIR = libft
+
+OBJ = $(SRC:.c=.o)
+
+CFLAGS = -Wall -Wextra -Werror
+
+MFLAGS = -L/usr/X11/lib -lXext -lX11 -lmlx
+
+all: $(NAME)
+
+$(NAME): $(OBJ) $(LIB)
+	gcc -o $(NAME) $(OBJ) $(CFLAGS) $(MFLAGS) $(LIB)
+
+$(LIB):
+	cd $(LIB_DIR) && $(MAKE)
+
+%.o: %.c
+	gcc -c $(CFLAGS) $< -o $@ -I . -I $(LIB_INC)
 
 clean:
-	rm *.o && rm $(NAME)
+	cd $(LIB_DIR) && $(MAKE) clean
+	rm -rf $(OBJ)
 
-fclean:
-	rm -f $(NAME)
 
-re: clean fclean all
+fclean:	clean
+	cd $(LIB_DIR) && $(MAKE) fclean
+	rm -rf $(NAME)
 
-# Do all the SDL2 building junk.
 
-SDL2:
-	mkdir -p SDL2/junk
-	tar xf SDL2-2.0.1.tar.gz
-	( cd SDL2-2.0.1 \
-		&& ./configure --prefix=$(shell pwd)/SDL2/ \
-		&& $(MAKE) && $(MAKE) install )
-	mv SDL2-2.0.1.tar.gz SDL2-2.0.1 SDL2/junk
+re: fclean all

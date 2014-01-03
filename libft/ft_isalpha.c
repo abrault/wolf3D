@@ -14,7 +14,7 @@
 
 int		ft_isalpha(int n)
 {
-    if ((64 < n && n < 91) || (96 < n && n < 123))
+	if ((64 < n && n < 91) || (96 < n && n < 123))
 		return (1);
 	return (0);
 }

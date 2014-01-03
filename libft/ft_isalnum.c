@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int		ft_isalnum(int n)
+int	ft_isalnum(int n)
 {
 	return (('A' <= n && n <= 'Z') || ('a' <= n && n <= 'z') ||
 			('0' <= n && n <= '9'));

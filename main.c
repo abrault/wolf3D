@@ -1,77 +1,96 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2014/01/02 13:52:17 by abrault           #+#    #+#             */
+/*   Updated: 2014/01/03 17:43:40 by abrault          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#define MLX_KEY_ESC		65307
+#define MLX_KEY_UP		65362
+#define MLX_KEY_DOWN	65364
+#define MLX_KEY_LEFT	65363
+#define MLX_KEY_RIGHT	65361
+
+#include "wolf_head.h"
 #include <stdio.h>
-#include "wolf.h"
+#include <math.h>
 
-int	getMap(char (*tab)[10][10])
+t_player	g_player;
+int		map[10][10] = {
+	{ 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{ 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{ 0, 0, 0, 1, 1, 1, 1, 0, 0},
+	{ 0, 0, 0, 1, 0, 0, 1, 0, 0},
+	{ 0, 0, 0, 1, 0, 0, 1, 0, 0},
+	{ 0, 0, 0, 1, 0, 0, 1, 0, 0},
+	{ 0, 0, 0, 1, 0, 0, 1, 0, 0},
+	{ 0, 0, 0, 1, 1, 0, 1, 0, 0},
+	{ 0, 0, 0, 0, 0, 0, 0, 0, 0},
+	{ 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+
+int		key_hook(int keycode, t_data *data)
 {
-	char		*line;
-	int		fd;
-	int		pos[2];
-	char		*tok;
-
-	pos[0] = 0;
-	pos[1] = 0;
-	fd = open("Map/map.txt", O_RDONLY);
-	if (!fd)
-		return (0);
-	while (get_next_line(fd, &line))
+	mlx_pixel_put(data->mlx, data->win, 400, 300, 0xFF00FF);
+	if (keycode == MLX_KEY_ESC)
+		exit(0);
+	else if (keycode == MLX_KEY_LEFT)
 	{
-		tok = ft_strtok(line, ' ');
-		while (tok)
-		{
-			(*tab)[pos[0]][pos[1]] = ft_atoi(tok);
-			tok = ft_strtok(NULL, ' ');
-			pos[1]++;
-		}
-		pos[0]++;
-		free(line);
+		if (g_player.rotation == 0)
+			g_player.rotation = 360;
+		g_player.rotation = g_player.rotation - 5;
 	}
-	close(fd);
-	return (1);
+	else if (keycode == MLX_KEY_RIGHT)
+	{
+		if (g_player.rotation == 360)
+			g_player.rotation = 0;
+		g_player.rotation = g_player.rotation + 5;
+	}
+	else if (keycode == MLX_KEY_UP)
+		g_player.y = g_player.y + 1;
+	else if (keycode == MLX_KEY_DOWN)
+		g_player.y = g_player.y - 1;
+	printf("Y: %d\n", g_player.y);
+	return (0);
 }
 
-void	SDL_loop(SDL_Window *window)
+int		expose_hook(t_data *data)
 {
-	SDL_Event	event;
-	int		work;
-
-	work = 1;
-	while (work)
-	{
-		SDL_WaitEvent(&event);
-		if (event.type == SDL_KEYDOWN)
-		{
-			if (event.key.keysym.sym == SDLK_ESCAPE)
-				work = 0;
-		}
-	}
+	(void)data;
+	return (0);
 }
 
-int	main(int argc, char* argv[])
+int		main(void)
 {
-	SDL_Window	*window;
-	char		map[10][10];
+	t_data		data;
 
-	if (!getMap(&map))
-	{
-		printf("Can't open map's file\n");
-		return (-1);
-	}
-	SDL_Init(SDL_INIT_VIDEO);
-	window = SDL_CreateWindow(
-			"Wolf3D - by Alexandre Brault",
-			SDL_WINDOWPOS_UNDEFINED,
-			SDL_WINDOWPOS_UNDEFINED,
-			640,
-			480,
-			SDL_WINDOW_OPENGL
-			);
-	if (window == NULL)
-	{
-		printf("Could not create window: %s\n", SDL_GetError());
-		return (1);
-	}
-	SDL_loop(window);
-	SDL_DestroyWindow(window);
-	SDL_Quit();
+	g_player.x = 50;
+	g_player.y = 60;
+	g_player.z = 2;
+	g_player.rotation = 90;
+
+	data.mlx = mlx_init();
+	data.win = mlx_new_window(data.mlx, 800, 600, "Wolf 3D");
+
+	void	*img;
+	char	*ptr_img;
+	int		bpp;
+	int		size_l;
+	int		endian;
+	int		width;
+	int		height;
+
+	img = mlx_new_image(data.mlx, 16, 16);
+	ptr_img = mlx_get_data_addr(img, &bpp, &size_l, &endian);
+	img = mlx_xpm_file_to_image(data.mlx, "images/wood.xpm", &width, &height);
+	mlx_put_image_to_window(data.mlx, data.win, img, 15, 15);
+	mlx_destroy_image(data.mlx, img);
+	mlx_expose_hook(data.win, expose_hook, &data);
+	mlx_key_hook(data.win, key_hook, &data);
+	mlx_loop(data.mlx);
 	return (0);
 }

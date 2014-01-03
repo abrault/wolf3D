@@ -12,9 +12,9 @@
 
 #include "libft.h"
 
-int		ft_toupper(int n)
+int	ft_toupper(int n)
 {
-    if (96 < n && n < 123)
-        return (n - 32);
-    return (n);
+	if (96 < n && n < 123)
+		return (n - 32);
+	return (n);
 }

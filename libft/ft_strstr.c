@@ -14,28 +14,28 @@
 
 char    *ft_strstr(const char *str_1, const char *str_2)
 {
-    int     i;
-    int     j;
-    int     mem;
+	int	i;
+	int	j;
+	int	mem;
 
-    i = 0;
-    j = 0;
+	i = 0;
+	j = 0;
 	mem = 0;
-    if (str_1 == NULL || str_2 == NULL)
-        return (NULL);
-    while (str_1[i] != '\0')
-    {
-        if (str_1[i] == str_2[j])
-        {
-            if (j == 0)
+	if (str_1 == NULL || str_2 == NULL)
+		return (NULL);
+	while (str_1[i] != '\0')
+	{
+		if (str_1[i] == str_2[j])
+		{
+			if (j == 0)
 				mem = i;
-            j++;
-        }
-        else
-            j = 0;
-        if (j == ft_strlen(str_2))
-            return ((char*)str_1 + mem);
-        i++;
-    }
-    return (NULL);
+			j++;
+		}
+		else
+			j = 0;
+		if (j == ft_strlen(str_2))
+			return ((char*)str_1 + mem);
+		i++;
+	}
+	return (NULL);
 }

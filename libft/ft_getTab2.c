@@ -17,6 +17,7 @@ void	ft_getTab2(int ***tab,int height, int width)
 	int	i;
 	int	x;
 
+	i = 0;
 	**tab = malloc(sizeof(**tab) * height);
 	while (i < height)
 	{

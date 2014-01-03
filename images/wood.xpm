@@ -1,0 +1,29 @@
+/* XPM */
+static char *wood[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 7 1",
+"  c #977B50",
+". c #806B3F",
+"X c #91744A",
+"o c #5D4D2F",
+"O c #55452B",
+"+ c #645033",
+"@ c #3E3220",
+/* pixels */
+" ....  X.      .",
+"  XoXX.....X.X .",
+"  ....XX   Xo  .",
+"OOOoooooooOOOOoo",
+" ....  . ..oXXX ",
+"..oXXX .XXXX....",
+"   X   ...o     ",
+"ooOOOOOoooOOOOoo",
+"     o.  XXX   .",
+"..... XX...o ...",
+" XXX  ....XXXXX.",
+"oOooOOOoooooOOOo",
+"     . .....Xo  ",
+"X.o    . XX....X",
+"  ...  .  .X    ",
+"ooo+OO+OoooO@OOo"
+};

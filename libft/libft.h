@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef		FT_LIBFT_H
-# define	FT_LIBFT_H
+#ifndef		LIBFT_H
+# define	LIBFT_H
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -25,7 +25,6 @@
 # define MIN(a,b) (a < b ? a : b)
 
 /* Fonction Generale */
-
 int		ft_atoi(const char *str);
 int		ft_strlen(const char *str);
 int		ft_isalnum(int n);
@@ -68,10 +67,9 @@ int		verifstr(int argc, char **argv, char ***option);
 int		getCommand(int argc, char **argv, char **option);
 
 /* Fonction gestion de fichier */
-
+int		traitement(char **stock, char **line);
 int		get_next_line(int const fd, char **line);
 char		*extract_line(char **str);
 char		*re_malloc(char *buff, char *str);
-int		traitement(char **stock, char **line);
 
 #endif

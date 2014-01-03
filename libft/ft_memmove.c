@@ -16,7 +16,7 @@ void	*ft_memmove(void *destination, void *source, size_t num)
 {
 	char	*str_1;
 	char	*str_2;
-	int		i;
+	size_t	i;
 
 	i = 0;
 	str_1 = destination;

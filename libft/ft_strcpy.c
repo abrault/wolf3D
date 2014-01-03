@@ -14,11 +14,11 @@
 
 char	*ft_strcpy(char *destination, const char *source)
 {
-	int 	i;
-	int		lenght;
+	int	i;
+	int	lenght;
 
-    if (destination == NULL || source == NULL)
-        return (destination);
+	if (destination == NULL || source == NULL)
+		return (destination);
 	lenght = ft_strlen(source);
 	i = 0;
 	while (i < lenght)

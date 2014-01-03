@@ -14,11 +14,11 @@
 
 char	*ft_strncpy(char *desti, const char *source, size_t size)
 {
-	int 	i;
-	int		lenght;
-
-    if (desti == NULL || source == NULL || size == 0)
-        return (desti);
+	size_t	i;
+	int	lenght;
+	
+	if (desti == NULL || source == NULL || size == 0)
+		return (desti);
 	lenght = ft_strlen(source);
 	i = 0;
 	while (i < size && (desti[i] =! 0 && source[i] != 0))

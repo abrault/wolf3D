@@ -12,6 +12,8 @@
 
 NAME = libft.a
 
+FLAG = -Wall -Wextra -Werror
+
 SRC = ft_atoi.c \
 	  ft_bzero.c \
 	  ft_isalnum.c \
@@ -89,7 +91,7 @@ SRC_O = ft_atoi.o \
 all: $(NAME)
 
 $(NAME):
-	gcc -c $(SRC)
+	gcc $(FLAG) -c $(SRC)
 	ar rc $(NAME) $(SRC_O)
 	ranlib $(NAME)
 

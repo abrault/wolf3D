@@ -14,19 +14,19 @@
 
 void    *ft_strdup(const char *str)
 {
-    int     lenght;
-    char    *new_string;
-    int     i;
+	int	lenght;
+	char	*new_string;
+	int	i;
 
-    if (str == NULL)
-        return (NULL);
-    i = 0;
-    lenght = ft_strlen(str);
-    new_string = malloc(sizeof(char) * lenght);
-    while (i < lenght)
+	if (str == NULL)
+		return (NULL);
+	i = 0;
+	lenght = ft_strlen(str);
+	new_string = malloc(sizeof(char) * lenght);
+	while (i < lenght)
 	{
-        new_string[i] = str[i];
+		new_string[i] = str[i];
 		i++;
 	}
-    return (new_string);
+	return (new_string);
 }

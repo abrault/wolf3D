@@ -14,10 +14,12 @@
 
 void	*ft_memccpy(void *destination, const void *source, int c, size_t num)
 {
-	char		*dest = destination;
-	const char	*src = source;
+	char		*dest;
+	const char	*src;
 	char		code;
 
+	dest = destination;
+	src = source;
 	while (num--)
 	{
 		code = *src++;
