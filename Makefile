@@ -6,13 +6,15 @@
 #    By: abrault <abrault@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/01/02 13:50:21 by abrault           #+#    #+#              #
-#    Updated: 2014/01/03 16:09:47 by abrault          ###   ########.fr        #
+#    Updated: 2014/01/06 00:42:53 by abrault          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = wolf3D
 
-SRC = main.c
+SRC = main.c \
+	  mlx_destroy_image.c \
+	  command.c
 
 LIB = libft/libft.a
 
@@ -45,6 +47,5 @@ clean:
 fclean:	clean
 	cd $(LIB_DIR) && $(MAKE) fclean
 	rm -rf $(NAME)
-
 
 re: fclean all
