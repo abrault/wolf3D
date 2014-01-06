@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:53:00 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/05 21:01:24 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/06 02:03:46 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 typedef struct s_data	t_data;
 typedef struct s_list	t_list;
 typedef struct s_img	t_img;
+typedef struct s_env	t_env;
 
 /*************************/
 /*       Structure       */
@@ -106,10 +107,14 @@ struct					t_list
 	t_list				*next;
 };
 
-struct					s_data
+struct					s_env
 {
 	t_xvar				*mlx;
 	void				*win;
+};
+
+struct					s_data
+{
 	t_list				*list;
 	int					pos_x;
 	int					pos_y;
@@ -121,10 +126,12 @@ struct					s_data
 /*        Prototype      */
 /*************************/
 
-int		on_key_up(t_data *data);
-int		on_key_down(t_data *data);
-int		on_key_left(t_data *data);
-int		on_key_right(t_data *data);
+t_data	g_data;
+
+int		on_key_up(void);
+int		on_key_down(void);
+int		on_key_left(void);
+int		on_key_right(void);
 
 void	ligne(int xi,int yi,int xf,int yf, t_data *data, int color);
 
