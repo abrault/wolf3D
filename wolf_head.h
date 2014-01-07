@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:53:00 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/07 14:12:06 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/07 14:18:22 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,12 @@ int		on_key_right(t_env *e);
 
 void	mlx_destroy_image(t_img *img);
 int		expose_hook(t_env *e);
+int		key_hook(int keycode, t_env *e)
 
+t_env	*ini_env(t_env *e, char *file);
+int		ini_data_and_img(t_env *e, char *file);
+
+char	**get_map(char *file);
 void	ligne(int xi,int yi,int xf,int yf, t_env *e, int color);
 
 #endif
