@@ -6,7 +6,7 @@
 #    By: abrault <abrault@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/01/02 13:50:21 by abrault           #+#    #+#              #
-#    Updated: 2014/01/06 02:25:17 by abrault          ###   ########.fr        #
+#    Updated: 2014/01/06 23:52:14 by abrault          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = wolf3D
 SRC = main.c\
 	  mlx_destroy_image.c\
 	  command.c\
-	  draw.c
+	  draw_image.c
 
 LIB = libft/libft.a
 

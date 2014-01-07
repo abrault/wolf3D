@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:52:17 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/07 14:13:41 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/07 18:57:12 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,22 @@
 #include <stdio.h>
 #include <math.h>
 
+void        mlx_pixel_put_to_image(t_env *e, t_point *draw)
+{
+	int        i;
+	int        x;
+	int        y;
+
+	i = 0;
+	x = draw->x * e->data->img->bpp / 8;
+	y = draw->y * e->data->img->size_line;
+	e->data->img->data[x + i++ + y] = mlx_get_color_value(e->mlx, draw->blue);
+	e->data->img->data[x + i++ + y] = mlx_get_color_value(e->mlx, draw->green);
+	e->data->img->data[x + i++ + y] = mlx_get_color_value(e->mlx, draw->red);
+}
 
 int		key_hook(int keycode, t_env *e)
 {
-	(void)e;
 	if (keycode == MLX_KEY_ESC)
 		exit(0);
 	if (keycode == MLX_KEY_LEFT)
@@ -34,6 +46,15 @@ int		key_hook(int keycode, t_env *e)
 		on_key_up(e);
 	if (keycode == MLX_KEY_DOWN)
 		on_key_down(e);
+	t_point		point;
+
+	point.x = 200;
+	point.y = 200;
+	point.red = 255;
+	point.green = 255;
+	point.red = 0;
+	mlx_pixel_put_to_image(e, &point);
+	mlx_put_image_to_window(e->mlx, e->win, e->data->img, e->data->rot, 5);
 	return (0);
 }
 
@@ -94,17 +115,15 @@ t_env	*ini_env(t_env *e)
 
 int		ini_data_and_img(t_env *e, char *file)
 {
-	/* Init Data */
 	e->data->pos_x = 0;
 	e->data->pos_y = 0;
 	e->data->rot = 90;
 	e->data->map = get_map(file);
-	/* Init image */
 	e->data->img->width = WIDTH_WINDOW;
 	e->data->img->height = HEIGHT_WINDOW;
-	e->data->img->image = mlx_new_image(e->mlx, WIDTH_WINDOW, HEIGHT_WINDOW);
+	e->data->img = mlx_new_image(e->mlx, WIDTH_WINDOW, HEIGHT_WINDOW);
 	e->data->img->data = mlx_get_data_addr(
-			e->data->img->image,
+			e->data->img,
 			&(e->data->img->bpp),
 			&(e->data->img->size_line),
 			&(e->data->img->endian));

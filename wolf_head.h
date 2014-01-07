@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:53:00 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/07 14:18:22 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/07 17:53:00 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_data		t_data;
 typedef struct s_img		t_img;
 typedef struct s_env		t_env;
 typedef struct s_line		t_line;
+typedef struct s_point		t_point;
 
 /*************************/
 /*       Structure       */
@@ -120,8 +121,17 @@ struct					s_data
 struct					s_env
 {
 	t_xvar				*mlx;
-	t_win_list			*win;
+	void				*win;
 	t_data				*data;
+};
+
+struct					s_point
+{
+	int					x;
+	int					y;
+	int					blue;
+	int					green;
+	int					red;
 };
 
 struct					s_line
@@ -143,9 +153,9 @@ int		on_key_right(t_env *e);
 
 void	mlx_destroy_image(t_img *img);
 int		expose_hook(t_env *e);
-int		key_hook(int keycode, t_env *e)
+int		key_hook(int keycode, t_env *e);
 
-t_env	*ini_env(t_env *e, char *file);
+t_env	*ini_env(t_env *e);
 int		ini_data_and_img(t_env *e, char *file);
 
 char	**get_map(char *file);
