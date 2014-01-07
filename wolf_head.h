@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:53:00 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/06 02:03:46 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/07 14:12:06 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,22 @@
 
 # include "libft/libft.h"
 
-# define MLX_MAX_EVENT LASTEvent
+/*************************/
+/*         Define        */
+/*************************/
+
+# define WIDTH_WINDOW	800
+# define HEIGHT_WINDOW	600
+# define MLX_MAX_EVENT	LASTEvent
 
 /*************************/
 /*        Typedef        */
 /*************************/
 
-typedef struct s_data	t_data;
-typedef struct s_list	t_list;
-typedef struct s_img	t_img;
-typedef struct s_env	t_env;
+typedef struct s_data		t_data;
+typedef struct s_img		t_img;
+typedef struct s_env		t_env;
+typedef struct s_line		t_line;
 
 /*************************/
 /*       Structure       */
@@ -98,41 +104,46 @@ struct					s_img
 	int					type;
 	int					format;
 	char				*data;
+	int					endian;
 	XShmSegmentInfo		shm;
 };
 
-struct					t_list
+struct					s_data
 {
+	int					pos_x;
+	int					pos_y;
+	int					rot;
 	t_img				*img;
-	t_list				*next;
+	char				**map;
 };
 
 struct					s_env
 {
 	t_xvar				*mlx;
-	void				*win;
+	t_win_list			*win;
+	t_data				*data;
 };
 
-struct					s_data
+struct					s_line
 {
-	t_list				*list;
-	int					pos_x;
-	int					pos_y;
-	int					rot;
-	char				**map;
+	int					beg_x;
+	int					beg_y;
+	int					end_x;
+	int					end_y;
 };
 
 /*************************/
 /*        Prototype      */
 /*************************/
 
-t_data	g_data;
+int		on_key_up(t_env *e);
+int		on_key_down(t_env *e);
+int		on_key_left(t_env *e);
+int		on_key_right(t_env *e);
 
-int		on_key_up(void);
-int		on_key_down(void);
-int		on_key_left(void);
-int		on_key_right(void);
+void	mlx_destroy_image(t_img *img);
+int		expose_hook(t_env *e);
 
-void	ligne(int xi,int yi,int xf,int yf, t_data *data, int color);
+void	ligne(int xi,int yi,int xf,int yf, t_env *e, int color);
 
 #endif
