@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/05 18:32:35 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/06 23:26:20 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/07 22:28:59 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,16 @@ int		on_key_down(t_env *e)
 
 int		on_key_left(t_env *e)
 {
-	printf("%d", e->data->pos_x);
+	e->data->rot += 5;
+	if (e->data->rot == 360)
+		e->data->rot = 0;
 	return (0);
 }
 
 int		on_key_right(t_env *e)
 {
-	(void)e;
+	e->data->rot -= 5;
+	if (e->data->rot == -5)
+		e->data->rot = 355;
 	return (0);
 }

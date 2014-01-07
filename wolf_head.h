@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:53:00 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/07 17:53:00 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/07 22:56:12 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,14 +134,6 @@ struct					s_point
 	int					red;
 };
 
-struct					s_line
-{
-	int					beg_x;
-	int					beg_y;
-	int					end_x;
-	int					end_y;
-};
-
 /*************************/
 /*        Prototype      */
 /*************************/
@@ -159,6 +151,8 @@ t_env	*ini_env(t_env *e);
 int		ini_data_and_img(t_env *e, char *file);
 
 char	**get_map(char *file);
-void	ligne(int xi,int yi,int xf,int yf, t_env *e, int color);
+void	draw_image(t_env *e);
+void	mlx_pixel_put_to_image(t_env *e, t_point *draw);
+void	ligne(t_env *e, t_point *first, t_point *second);
 
 #endif

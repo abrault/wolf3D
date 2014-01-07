@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:52:17 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/07 18:57:12 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/07 22:55:13 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include <stdio.h>
 #include <math.h>
 
-void        mlx_pixel_put_to_image(t_env *e, t_point *draw)
+void	mlx_pixel_put_to_image(t_env *e, t_point *draw)
 {
 	int        i;
 	int        x;
@@ -46,21 +46,14 @@ int		key_hook(int keycode, t_env *e)
 		on_key_up(e);
 	if (keycode == MLX_KEY_DOWN)
 		on_key_down(e);
-	t_point		point;
-
-	point.x = 200;
-	point.y = 200;
-	point.red = 255;
-	point.green = 255;
-	point.red = 0;
-	mlx_pixel_put_to_image(e, &point);
+	draw_image(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->data->img, e->data->rot, 5);
 	return (0);
 }
 
 int		expose_hook(t_env *e)
 {
-	(void)e;
+	draw_image(e);
 	return (0);
 }
 
