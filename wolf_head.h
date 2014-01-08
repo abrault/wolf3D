@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:53:00 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/07 22:56:12 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/08 17:04:47 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ int		on_key_down(t_env *e);
 int		on_key_left(t_env *e);
 int		on_key_right(t_env *e);
 
-void	mlx_destroy_image(t_img *img);
+//void	mlx_destroy_image(t_img *img);
 int		expose_hook(t_env *e);
 int		key_hook(int keycode, t_env *e);
 

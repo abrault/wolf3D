@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/05 18:32:35 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/07 22:28:59 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/08 17:38:28 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 
 int		on_key_up(t_env *e)
 {
-	(void)e;
+	e->data->pos_y--;
 	return (0);
 }
 
 int		on_key_down(t_env *e)
 {
-	(void)e;
+	e->data->pos_y++;
 	return (0);
 }
 

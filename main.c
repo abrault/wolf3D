@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:52:17 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/07 22:55:13 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/08 17:10:44 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,14 @@ int		key_hook(int keycode, t_env *e)
 	if (keycode == MLX_KEY_DOWN)
 		on_key_down(e);
 	draw_image(e);
-	mlx_put_image_to_window(e->mlx, e->win, e->data->img, e->data->rot, 5);
+	mlx_put_image_to_window(e->mlx, e->win, e->data->img, 0, 0);
 	return (0);
 }
 
 int		expose_hook(t_env *e)
 {
 	draw_image(e);
+	mlx_put_image_to_window(e->mlx, e->win, e->data->img, 0, 0);
 	return (0);
 }
 
@@ -108,8 +109,8 @@ t_env	*ini_env(t_env *e)
 
 int		ini_data_and_img(t_env *e, char *file)
 {
-	e->data->pos_x = 0;
-	e->data->pos_y = 0;
+	e->data->pos_x = 55;
+	e->data->pos_y = 55;
 	e->data->rot = 90;
 	e->data->map = get_map(file);
 	e->data->img->width = WIDTH_WINDOW;
