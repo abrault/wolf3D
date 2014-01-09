@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:52:17 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/08 17:10:44 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/09 21:30:43 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 
 #include "wolf_head.h"
 #include <stdio.h>
-#include <math.h>
 
 void	mlx_pixel_put_to_image(t_env *e, t_point *draw)
 {
@@ -109,8 +108,8 @@ t_env	*ini_env(t_env *e)
 
 int		ini_data_and_img(t_env *e, char *file)
 {
-	e->data->pos_x = 55;
-	e->data->pos_y = 55;
+	e->data->pos_x = 50;
+	e->data->pos_y = 50;
 	e->data->rot = 90;
 	e->data->map = get_map(file);
 	e->data->img->width = WIDTH_WINDOW;

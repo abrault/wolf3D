@@ -6,41 +6,35 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/06 17:26:27 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/08 17:38:26 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/09 23:56:00 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf_head.h"
 
-void	ligne(t_env *e, t_point *first, t_point *second)
-{
-	int		x;
-	int		y;
-	double	a;
-	double	b;
-	t_point	point;
+#include <stdio.h>
+#include <math.h>
 
-	point.red = first->red;
-	point.green = first->green;
-	point.blue = first->blue;
-	(void)e;
-	a =(double)(second->y - first->y) / (second->x - first->x);
-	b = first->y - a * first->x ;
-	x = first->x;
-	while (x <= second->x)
+void		horizontal(t_env *e, int x, int first_y, int second_y)
+{
+	t_point		point;
+
+	point.red = 255;
+	point.green = 0;
+	point.blue = 0;
+	point.x = x;
+	while (first_y < second_y)
 	{
-		y = (int)(a * x + b);
-		point.x = x;
-		point.y = y;
-		if (x >= 0 && x <= WIDTH_WINDOW)
+		point.y = first_y;
+		if (point.x >= 0 && point.x <= WIDTH_WINDOW && point.y >= 0 && point.y <= HEIGHT_WINDOW)
 			mlx_pixel_put_to_image(e, &point);
-		x++;
+		first_y++;
 	}
 }
 
 void		draw_background(t_env *e)
 {
-	t_point	point;
+	t_point		point;
 
 	point.y = 0;
 	point.red = 90;
@@ -55,35 +49,39 @@ void		draw_background(t_env *e)
 			point.x++;
 		}
 		point.y++;
-		if (point.y == 300)
+		if (point.y == HEIGHT_WINDOW / 2)
 			point.blue = 0;
 	}
 }
 
+int			find_dist(t_env *e, int rayon)
+{
+	int		x;
+	int		y;
+	int		angle;
+
+	angle = e->data->rot - 30 + (rayon * 60 / WIDTH_WINDOW);
+	x = cos(angle);
+	y = sin(angle);
+	return (sqrt((e->data->pos_x - x) * (e->data->pos_x - x) +(e->data->pos_y - y) * (e->data->pos_y - y)));
+}
 
 void		draw_image(t_env *e)
 {
-	t_point		first;
-	t_point		second;
+	int		rayon;
+	int		dist;
 
-	first.red = 255;
-	first.green = 0;
-	first.blue = 0;
-	draw_background(e);
-	first.y = 300 + (e->data->pos_y - 20) * 3;
-	first.x = 400 - (e->data->pos_y - 50) * 20;
-	second.x = 400 + (e->data->pos_y - 50) * 20;
-	second.y = first.y;
-	ligne(e, &first, &second);
-	first.y = 300 - (e->data->pos_y - 20) * 3;
-	second.y = first.y;
-	ligne(e, &first, &second);
-	second.x = 400 + (e->data->pos_y - 50) * 20;
-	second.y = 300 + (e->data->pos_y - 20) * 3;
-	ligne(e, &first, &second);
-	first.y = 300 + (e->data->pos_y - 20) * 3;
-	first.x = 400 - (e->data->pos_y - 50) * 20;
-	second.x = 400 + (e->data->pos_y - 50) * 20;
-	second.y = 300 - (e->data->pos_y - 20) * 3;
-	ligne(e, &first, &second);
+	rayon = 0;
+	//draw_background(e);
+	while (rayon < WIDTH_WINDOW)
+	{
+		dist = find_dist(e, rayon);
+		if (dist != 0)
+		{
+			horizontal(e, rayon, (HEIGHT_WINDOW / 2) - dist,
+					(HEIGHT_WINDOW / 2) + dist);
+			dist = 0;
+		}
+		rayon++;
+	}
 }

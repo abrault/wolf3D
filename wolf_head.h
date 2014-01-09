@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:53:00 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/08 17:04:47 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/09 21:42:31 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@
 /*         Define        */
 /*************************/
 
-# define WIDTH_WINDOW	800
-# define HEIGHT_WINDOW	600
+# define WIDTH_WINDOW	1280
+# define HEIGHT_WINDOW	800
 # define MLX_MAX_EVENT	LASTEvent
 
 /*************************/
@@ -111,8 +111,8 @@ struct					s_img
 
 struct					s_data
 {
-	int					pos_x;
-	int					pos_y;
+	float					pos_x;
+	float					pos_y;
 	int					rot;
 	t_img				*img;
 	char				**map;
@@ -134,6 +134,17 @@ struct					s_point
 	int					red;
 };
 
+struct					s_line
+{
+	int					first_x;
+	int					first_y;
+	int					second_x;
+	int					second_y;
+	int					red;
+	int					green;
+	int					blue;
+};
+
 /*************************/
 /*        Prototype      */
 /*************************/
@@ -153,6 +164,6 @@ int		ini_data_and_img(t_env *e, char *file);
 char	**get_map(char *file);
 void	draw_image(t_env *e);
 void	mlx_pixel_put_to_image(t_env *e, t_point *draw);
-void	ligne(t_env *e, t_point *first, t_point *second);
+void	ligne(t_env *e, t_line *line);
 
 #endif
