@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:53:00 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/09 21:42:31 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/10 17:04:25 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # define WIDTH_WINDOW	1280
 # define HEIGHT_WINDOW	800
 # define MLX_MAX_EVENT	LASTEvent
+# define SIZE_CASE		64
 
 /*************************/
 /*        Typedef        */
@@ -111,8 +112,8 @@ struct					s_img
 
 struct					s_data
 {
-	float					pos_x;
-	float					pos_y;
+	float				pos_x;
+	float				pos_y;
 	int					rot;
 	t_img				*img;
 	char				**map;
@@ -161,9 +162,8 @@ int		key_hook(int keycode, t_env *e);
 t_env	*ini_env(t_env *e);
 int		ini_data_and_img(t_env *e, char *file);
 
-char	**get_map(char *file);
+char	**get_map(char *file, t_env *e);
 void	draw_image(t_env *e);
 void	mlx_pixel_put_to_image(t_env *e, t_point *draw);
-void	ligne(t_env *e, t_line *line);
 
 #endif

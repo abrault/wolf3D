@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:52:17 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/09 21:30:43 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/10 19:03:41 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,8 @@ int		expose_hook(t_env *e)
 	return (0);
 }
 
-char	**get_map(char *file)
+char	**get_map(char *file, t_env *e)
 {
-	char	**map;
 	int		x;
 	int		y;
 	char	*line;
@@ -68,39 +67,43 @@ char	**get_map(char *file)
 
 	x = 0;
 	y = 0;
+	e->data->map = malloc(sizeof(char*) * 10);
+	while (x < 10)
+	{
+		e->data->map[x] = malloc(sizeof(char) * 10);
+		x++;
+	}
 	if ((fd = open(file, O_RDONLY)))
 	{
-		map = malloc(sizeof(char*) * 10);
-		while (x < 10)
-		{
-			map[x] = malloc(sizeof(char) * 10);
-			x++;
-		}
 		while (get_next_line(fd, &line))
 		{
 			x = 0;
 			tok = ft_strtok(line, ' ');
 			while (tok)
 			{
-				map[y][x] = ft_atoi(tok);
+				e->data->map[y][x] = ft_atoi(tok);
 				tok = ft_strtok(NULL, ' ');
+				x++;
 			}
 			y++;
+			printf("\n");
 		}
 		close(fd);
-		return (map);
+		return (e->data->map);
 	}
-	return (NULL);
+	return (0);
 }
 
 t_env	*ini_env(t_env *e)
 {
+	int		x;
+
+	x = 0;
 	e = malloc(sizeof(t_env));
 	e->data = malloc(sizeof(t_data));
 	e->mlx = malloc(sizeof(t_xvar));
 	e->win = malloc(sizeof(t_win_list));
 	e->data->img = malloc(sizeof(t_img));
-
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, WIDTH_WINDOW, HEIGHT_WINDOW, "Wolf 3D");
 	return (e);
@@ -108,10 +111,10 @@ t_env	*ini_env(t_env *e)
 
 int		ini_data_and_img(t_env *e, char *file)
 {
-	e->data->pos_x = 50;
-	e->data->pos_y = 50;
+	e->data->pos_x = 64 * 5;
+	e->data->pos_y = 64 * 5;
 	e->data->rot = 90;
-	e->data->map = get_map(file);
+	e->data->map = get_map(file, e);
 	e->data->img->width = WIDTH_WINDOW;
 	e->data->img->height = HEIGHT_WINDOW;
 	e->data->img = mlx_new_image(e->mlx, WIDTH_WINDOW, HEIGHT_WINDOW);
@@ -134,7 +137,6 @@ int		main(int ac, char **av)
 	{
 		e = ini_env(e);
 		ini_data_and_img(e, av[1]);
-
 		mlx_expose_hook(e->win, expose_hook, e);
 		mlx_hook(e->win, KeyPress, KeyRelease, &key_hook, e);
 		mlx_key_hook(e->win, key_hook, e);
