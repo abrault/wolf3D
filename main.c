@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:52:17 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/10 19:03:41 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/11 19:04:08 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 #include "wolf_head.h"
 #include <stdio.h>
+#include <time.h>
 
 void	mlx_pixel_put_to_image(t_env *e, t_point *draw)
 {
@@ -45,6 +46,13 @@ int		key_hook(int keycode, t_env *e)
 		on_key_up(e);
 	if (keycode == MLX_KEY_DOWN)
 		on_key_down(e);
+	if (keycode == 32)
+	{
+		if (e->data->map[(int)e->data->pos_y / 64][(int)e->data->pos_x / 64] == 1)
+			e->data->map[(int)e->data->pos_y / 64][(int)e->data->pos_x / 64] = 0;
+		else
+			e->data->map[(int)e->data->pos_y / 64][(int)e->data->pos_x / 64] = 1;
+	}
 	draw_image(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->data->img, 0, 0);
 	return (0);
@@ -67,10 +75,10 @@ char	**get_map(char *file, t_env *e)
 
 	x = 0;
 	y = 0;
-	e->data->map = malloc(sizeof(char*) * 10);
-	while (x < 10)
+	e->data->map = malloc(sizeof(char*) * 100);
+	while (x < 100)
 	{
-		e->data->map[x] = malloc(sizeof(char) * 10);
+		e->data->map[x] = malloc(sizeof(char) * 100);
 		x++;
 	}
 	if ((fd = open(file, O_RDONLY)))
@@ -86,7 +94,6 @@ char	**get_map(char *file, t_env *e)
 				x++;
 			}
 			y++;
-			printf("\n");
 		}
 		close(fd);
 		return (e->data->map);
@@ -96,9 +103,6 @@ char	**get_map(char *file, t_env *e)
 
 t_env	*ini_env(t_env *e)
 {
-	int		x;
-
-	x = 0;
 	e = malloc(sizeof(t_env));
 	e->data = malloc(sizeof(t_data));
 	e->mlx = malloc(sizeof(t_xvar));
@@ -114,6 +118,9 @@ int		ini_data_and_img(t_env *e, char *file)
 	e->data->pos_x = 64 * 5;
 	e->data->pos_y = 64 * 5;
 	e->data->rot = 90;
+	e->data->red = 255;
+	e->data->green = 255;
+	e->data->blue = 255;
 	e->data->map = get_map(file, e);
 	e->data->img->width = WIDTH_WINDOW;
 	e->data->img->height = HEIGHT_WINDOW;
@@ -139,7 +146,7 @@ int		main(int ac, char **av)
 		ini_data_and_img(e, av[1]);
 		mlx_expose_hook(e->win, expose_hook, e);
 		mlx_hook(e->win, KeyPress, KeyRelease, &key_hook, e);
-		mlx_key_hook(e->win, key_hook, e);
+		//mlx_key_hook(e->win, key_hook, e);
 		mlx_loop(e->mlx);
 	}
 	return (0);

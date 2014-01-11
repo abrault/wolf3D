@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:53:00 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/10 17:04:25 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/11 18:00:55 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,9 @@ struct					s_data
 	float				pos_x;
 	float				pos_y;
 	int					rot;
+	int					red;
+	int					green;
+	int					blue;
 	t_img				*img;
 	char				**map;
 };
