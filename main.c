@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:52:17 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/11 19:04:08 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/11 23:09:56 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 #define MLX_KEY_RIGHT	65363
 
 #include "wolf_head.h"
-#include <stdio.h>
-#include <time.h>
 
 void	mlx_pixel_put_to_image(t_env *e, t_point *draw)
 {
@@ -48,10 +46,10 @@ int		key_hook(int keycode, t_env *e)
 		on_key_down(e);
 	if (keycode == 32)
 	{
-		if (e->data->map[(int)e->data->pos_y / 64][(int)e->data->pos_x / 64] == 1)
-			e->data->map[(int)e->data->pos_y / 64][(int)e->data->pos_x / 64] = 0;
+		if (e->data->map[(int)e->data->pos_y / SIZE_CASE][(int)e->data->pos_x / SIZE_CASE] == 1)
+			e->data->map[(int)e->data->pos_y / SIZE_CASE][(int)e->data->pos_x / SIZE_CASE] = 0;
 		else
-			e->data->map[(int)e->data->pos_y / 64][(int)e->data->pos_x / 64] = 1;
+			e->data->map[(int)e->data->pos_y / SIZE_CASE][(int)e->data->pos_x / SIZE_CASE] = 1;
 	}
 	draw_image(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->data->img, 0, 0);
@@ -115,12 +113,15 @@ t_env	*ini_env(t_env *e)
 
 int		ini_data_and_img(t_env *e, char *file)
 {
-	e->data->pos_x = 64 * 5;
-	e->data->pos_y = 64 * 5;
+	e->data->pos_x = SIZE_CASE * 5;
+	e->data->pos_y = SIZE_CASE * 5;
 	e->data->rot = 90;
-	e->data->red = 255;
-	e->data->green = 255;
-	e->data->blue = 255;
+	e->data->red = 0;
+	e->data->green = 0;
+	e->data->blue = 0;
+	e->data->nbr_col = 17;
+	e->data->nbr_line = 10;
+	e->data->dist_ecran = WIDTH_WINDOW / 2 / tan(rad(FOV / 2));
 	e->data->map = get_map(file, e);
 	e->data->img->width = WIDTH_WINDOW;
 	e->data->img->height = HEIGHT_WINDOW;

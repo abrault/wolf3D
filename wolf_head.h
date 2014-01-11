@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:53:00 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/11 18:00:55 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/11 23:11:35 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,21 @@
 # include <X11/extensions/XShm.h>
 # include <sys/shm.h>
 
+# include <math.h>
+
 # include "libft/libft.h"
 
 /*************************/
 /*         Define        */
 /*************************/
 
-# define WIDTH_WINDOW	1280
-# define HEIGHT_WINDOW	800
+# define WIDTH_WINDOW	640
+# define HEIGHT_WINDOW	400
 # define MLX_MAX_EVENT	LASTEvent
 # define SIZE_CASE		64
+# define PRECISION		5
+# define FOV			64
+# define PI				3.14159265359
 
 /*************************/
 /*        Typedef        */
@@ -118,6 +123,10 @@ struct					s_data
 	int					red;
 	int					green;
 	int					blue;
+	int					fov;
+	int					nbr_col;
+	int					nbr_line;
+	float				dist_ecran;
 	t_img				*img;
 	char				**map;
 };
@@ -157,6 +166,8 @@ int		on_key_up(t_env *e);
 int		on_key_down(t_env *e);
 int		on_key_left(t_env *e);
 int		on_key_right(t_env *e);
+
+float	rad(float degre);
 
 //void	mlx_destroy_image(t_img *img);
 int		expose_hook(t_env *e);

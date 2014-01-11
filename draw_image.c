@@ -6,14 +6,12 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/06 17:26:27 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/11 19:11:00 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/11 23:11:32 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf_head.h"
-
 #include <stdio.h>
-#include <math.h>
 
 void		horizontal(t_env *e, int x, int first_y, int second_y)
 {
@@ -26,7 +24,8 @@ void		horizontal(t_env *e, int x, int first_y, int second_y)
 	while (first_y < second_y)
 	{
 		point.y = first_y;
-		if (point.x >= 0 && point.x <= WIDTH_WINDOW && point.y >= 0 && point.y <= HEIGHT_WINDOW)
+		if (point.x >= 0 && point.x <= WIDTH_WINDOW
+				&& point.y >= 0 && point.y <= HEIGHT_WINDOW)
 			mlx_pixel_put_to_image(e, &point);
 		first_y++;
 	}
@@ -54,6 +53,11 @@ void		draw_background(t_env *e)
 	}
 }
 
+float		rad(float degre)
+{
+	return (degre * PI / 180);
+}
+
 int			find_dist(t_env *e, int rayon)
 {
 	float	new_x;
@@ -62,50 +66,29 @@ int			find_dist(t_env *e, int rayon)
 	float	cosa;
 	float	sina;
 
-	angle = (e->data->rot - 30 + (rayon * 60 / WIDTH_WINDOW)) * 3.14159265359 / 180;
+	angle = rad(e->data->rot - FOV / 2 +
+			(rayon * FOV / WIDTH_WINDOW));
 	cosa = cos(angle);
 	sina = sin(angle);
-	angle = (e->data->rot - 30 + (rayon * 60 / WIDTH_WINDOW));
-
+	angle = (e->data->rot - FOV / 2 +
+			(rayon * e->data->fov / WIDTH_WINDOW));
 	new_x = e->data->pos_x;
 	new_y = e->data->pos_y;
-	while (new_y <= 1088 && new_y >= 0 && new_x <= 1088 && new_x >= 0)
+	while (new_y <= (SIZE_CASE * e->data->nbr_line) && new_y >= 0 && new_x <=
+			(SIZE_CASE * e->data->nbr_col) && new_x >= 0)
 	{
-			new_x += cosa / 10;
-			new_y += sina / 10;
-			if (e->data->map[(int)(new_y / 64)][(int)(new_x / 64)] == 1)
+			new_x += cosa / PRECISION;
+			new_y += sina / PRECISION;
+			if (e->data->map[(int)(new_y / SIZE_CASE)]
+					[(int)(new_x / SIZE_CASE)] == 1)
 			{
-				if (angle > 180)
-				{
-					if (new_y - sina > new_y && (int)((new_x - cosa) / 64) == (int)(new_x / 64))
-					{
-						e->data->red = 210;
-						e->data->green = 210;
-						e->data->blue = 210;
-					}
-					else
-					{
+					if ((new_y - sina > new_y && (int)((new_x - cosa)
+								/ SIZE_CASE) == (int)(new_x / SIZE_CASE))
+					|| (new_y - sina < new_y && (int)((new_x - cosa)
+								/ SIZE_CASE) == (int)(new_x / SIZE_CASE)))
 						e->data->red = 240;
-						e->data->green = 240;
-						e->data->blue = 240;
-					}
-				}
-				else
-				{
-					if (new_y - sina < new_y && (int)((new_x - cosa) / 64) == (int)(new_x / 64))
-					{
-						e->data->red = 210;
-						e->data->green = 210;
-						e->data->blue = 210;
-					}
 					else
-					{
-						e->data->red = 240;
-						e->data->green = 240;
-						e->data->blue = 240;
-					}
-
-				}
+						e->data->red = 200;
 				return (sqrt((e->data->pos_x - new_x) * (e->data->pos_x - new_x)
 						+ (e->data->pos_y - new_y) * (e->data->pos_y - new_y)));
 			}
@@ -117,15 +100,14 @@ void		draw_image(t_env *e)
 {
 	int		rayon;
 	float	dist;
-	int		dist_ecran;
 
 	rayon = 0;
 	draw_background(e);
-	dist_ecran = WIDTH_WINDOW / 2 / tan(30 * 3.141592653 / 180);
+	e->data->dist_ecran = WIDTH_WINDOW / 2 / tan(30 * 3.141592653 / 180);
 	while (rayon < WIDTH_WINDOW)
 	{
 		dist = find_dist(e, rayon);
-		dist = 64 / dist * dist_ecran;
+		dist = SIZE_CASE / dist * e->data->dist_ecran;
 		if (dist != 0)
 			horizontal(e, WIDTH_WINDOW - rayon - 1, HEIGHT_WINDOW / 2 -
 					(dist / 2), HEIGHT_WINDOW / 2 + (dist / 2));
