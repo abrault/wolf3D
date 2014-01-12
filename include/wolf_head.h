@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:53:00 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/12 12:44:27 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/12 13:54:58 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,19 +175,21 @@ int							on_key_left(t_env *e);
 int							on_key_right(t_env *e);
 
 /* Tools */
-float	rad(float degre);
+float						rad(float degre);
 
 /* Event */
-int		expose_hook(t_env *e);
-int		key_hook(int keycode, t_env *e);
+int							expose_hook(t_env *e);
+int							key_hook(int keycode, t_env *e);
 
 /* Init */
-t_env	*ini_env(t_env *e);
-int		ini_data_and_img(t_env *e, char *file);
-char	**get_map(char *file, t_env *e);
+t_env						*ini_env(t_env *e);
+int							ini_data_and_img(t_env *e, char *file);
+int							get_map(char *file, t_env *e);
+int							get_dim_map(char *file, t_env *e);
+int							ini_map(t_env *e, char *file);
 
 /* Draw */
-void	draw_image(t_env *e);
-void	mlx_pixel_put_to_image(t_env *e, t_point *draw);
+void						draw_image(t_env *e);
+void						mlx_pixel_put_to_image(t_env *e, t_point *draw);
 
 #endif

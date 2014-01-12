@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:52:17 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/12 12:49:13 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/12 13:37:54 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,47 +48,6 @@ int		expose_hook(t_env *e)
 	draw_image(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->data->img, 0, 0);
 	return (0);
-}
-
-char	**get_map(char *file, t_env *e)
-{
-	int		x;
-	int		y;
-	char	*line;
-	char	*tok;
-	int		fd;
-
-	x = 0;
-	y = 0;
-	e->data->map = malloc(sizeof(char*) * 100);
-	while (x < 100)
-	{
-		e->data->map[x] = malloc(sizeof(char) * 100);
-		x++;
-	}
-	if ((fd = open(file, O_RDONLY)))
-	{
-		while (get_next_line(fd, &line))
-		{
-			x = 0;
-			tok = ft_strtok(line, ' ');
-			while (tok)
-			{
-				e->data->map[y][x] = ft_atoi(tok);
-				tok = ft_strtok(NULL, ' ');
-				x++;
-			}
-			y++;
-		}
-		close(fd);
-		return (e->data->map);
-	}
-	else
-	{
-		write(1, "Incorrect file ...\n", 19);
-		exit(0);
-	}
-	return (NULL);
 }
 
 int		main(int ac, char **av)
