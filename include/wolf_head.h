@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:53:00 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/12 14:29:03 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/12 17:42:38 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 /*************************/
 
 # include <mlx.h>
+# include <math.h>
 # include <stdlib.h>
 # include <unistd.h>
 
@@ -30,16 +31,14 @@
 # include <X11/extensions/XShm.h>
 # include <sys/shm.h>
 
-# include <math.h>
-
 # include "libft/libft.h"
 
 /*************************/
 /*         Define        */
 /*************************/
 
-# define WIDTH_WINDOW	640
-# define HEIGHT_WINDOW	400
+# define WIDTH_WINDOW	800
+# define HEIGHT_WINDOW	600
 # define MLX_MAX_EVENT	LASTEvent
 # define SIZE_CASE		64
 # define PRECISION		5
@@ -132,6 +131,7 @@ struct						s_data
 	int						fov;
 	int						nbr_col;
 	int						nbr_line;
+	int						direc;
 	float					dist_ecran;
 	t_img					*img;
 	char					**map;
@@ -175,7 +175,8 @@ int							on_key_left(t_env *e);
 int							on_key_right(t_env *e);
 
 /* Tools */
-float						rad(float degre);
+float						ft_rad(float degre);
+float						ft_abs(float nbr);
 
 /* Event */
 int							expose_hook(t_env *e);
@@ -191,5 +192,6 @@ int							ini_map(t_env *e, char *file);
 /* Draw */
 void						draw_image(t_env *e);
 void						mlx_pixel_put_to_image(t_env *e, t_point *draw);
+void						get_color(t_env *e, float dist);
 
 #endif

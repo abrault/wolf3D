@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:52:17 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/12 15:01:03 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/12 16:58:41 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int		main(int ac, char **av)
 		ini_data_and_img(e, av[1]);
 		mlx_expose_hook(e->win, expose_hook, e);
 		mlx_hook(e->win, KeyPress, KeyRelease, &key_hook, e);
-		/*mlx_key_hook(e->win, key_hook, e);*/
 		mlx_loop(e->mlx);
 	}
 	return (0);

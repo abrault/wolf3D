@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/12 12:19:22 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/12 14:20:20 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/12 17:12:51 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		ini_data_and_img(t_env *e, char *file)
 	if (!get_dim_map(file, e))
 		exit(0);
 	ini_map(e, file);
-	e->data->dist_ecran = WIDTH_WINDOW / 2 / tan(rad(FOV / 2));
+	e->data->dist_ecran = WIDTH_WINDOW / 2 / tan(ft_rad(FOV / 2));
 	e->data->img->width = WIDTH_WINDOW;
 	e->data->img->height = HEIGHT_WINDOW;
 	e->data->img = mlx_new_image(e->mlx, WIDTH_WINDOW, HEIGHT_WINDOW);

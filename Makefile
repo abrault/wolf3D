@@ -6,7 +6,7 @@
 #    By: abrault <abrault@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/01/02 13:50:21 by abrault           #+#    #+#              #
-#    Updated: 2014/01/12 13:54:59 by abrault          ###   ########.fr        #
+#    Updated: 2014/01/12 17:40:58 by abrault          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,9 @@ SRC = src/main.c\
 	  src/command.c\
 	  src/draw_image.c \
 	  src/ini.c \
-	  src/map.c
+	  src/map.c \
+	  src/tools.c \
+	  src/color.c
 
 LIB = libft/libft.a
 

@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/06 17:26:27 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/12 14:59:39 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/12 17:48:23 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,6 @@ void		draw_background(t_env *e)
 	}
 }
 
-float		rad(float degre)
-{
-	return (degre * PI / 180);
-}
-
 int			find_dist(t_env *e, int rayon)
 {
 	float	new_x;
@@ -64,8 +59,9 @@ int			find_dist(t_env *e, int rayon)
 	float	angle;
 	float	cosa;
 	float	sina;
+	float	dist;
 
-	angle = rad(e->data->rot - FOV / 2 + (rayon * FOV / WIDTH_WINDOW));
+	angle = ft_rad(e->data->rot - FOV / 2 + (rayon * FOV / WIDTH_WINDOW));
 	cosa = cos(angle);
 	sina = sin(angle);
 	angle = (e->data->rot - FOV / 2 + (rayon * e->data->fov / WIDTH_WINDOW));
@@ -75,20 +71,28 @@ int			find_dist(t_env *e, int rayon)
 			(SIZE_CASE * e->data->nbr_col) && new_x >= 0)
 	{
 			new_x += cosa / PRECISION;
+			if (e->data->map[(int)(new_y / SIZE_CASE)]
+							[(int)(new_x / SIZE_CASE)] == 1)
+			{
+				if (cosa > 0)
+					e->data->direc = 2;
+				else
+					e->data->direc = 4;
+			}
+			else
+			{
+				if (sina > 0)
+					e->data->direc = 6;
+				else
+					e->data->direc = 8;
+			}
 			new_y += sina / PRECISION;
 			if (e->data->map[(int)(new_y / SIZE_CASE)]
-					[(int)(new_x / SIZE_CASE)] == 1)
+							[(int)(new_x / SIZE_CASE)] == 1)
 			{
-					if ((new_y - sina > new_y && (int)((new_x - cosa)
-								/ SIZE_CASE) == (int)(new_x / SIZE_CASE))
-					|| (new_y - sina < new_y && (int)((new_x - cosa)
-								/ SIZE_CASE) == (int)(new_x / SIZE_CASE)))
-						e->data->red = 240;
-					else
-						e->data->red = 200;
-				return (sqrt(e->data->pos_x - new_x) *
-						(e->data->pos_x - new_x) + (e->data->pos_y - new_y)
-						* (e->data->pos_y - new_y));
+				dist = sqrt((e->data->pos_x - new_x) * (e->data->pos_x - new_x)
+						+ (e->data->pos_y - new_y) * (e->data->pos_y - new_y));
+				return (dist);
 			}
 	}
 	return (0);
@@ -101,11 +105,12 @@ void		draw_image(t_env *e)
 
 	rayon = 0;
 	draw_background(e);
-	e->data->dist_ecran = WIDTH_WINDOW / 2 / tan(rad(30));
+	e->data->dist_ecran = WIDTH_WINDOW / 2 / tan(ft_rad(30));
 	while (rayon < WIDTH_WINDOW)
 	{
 		dist = find_dist(e, rayon);
 		dist = SIZE_CASE / dist * e->data->dist_ecran;
+		get_color(e, dist);
 		if (dist != 0)
 			horizontal(e, WIDTH_WINDOW - rayon - 1, HEIGHT_WINDOW / 2 -
 					(dist / 2), HEIGHT_WINDOW / 2 + (dist / 2));
