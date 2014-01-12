@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/22 15:17:35 by abrault           #+#    #+#             */
-/*   Updated: 2013/11/29 12:36:57 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/12 14:37:40 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <sys/uio.h>
 
 # define BUFF_SIZE 100
-# define MIN(a,b) (a < b ? a : b)
+# define MIN(a, b) (a < b ? a : b)
 
 /* Fonction Generale */
 int		ft_atoi(const char *str);

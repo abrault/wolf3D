@@ -6,13 +6,13 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/22 13:31:48 by abrault           #+#    #+#             */
-/*   Updated: 2013/12/22 13:31:55 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/12 14:31:27 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_getTab2(int ***tab,int height, int width)
+void	ft_getTab2(int ***tab, int height, int width)
 {
 	int	i;
 	int	x;

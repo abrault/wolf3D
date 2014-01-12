@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/05 18:32:35 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/12 12:48:35 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/12 14:45:12 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int		on_key_up(t_env *e)
 {
 	if (e->data->map[(int)((e->data->pos_y + sin(rad(e->data->rot)) * VITESSE)
-		/ SIZE_CASE)][(int)((e->data->pos_x + cos(rad(e->data->rot)) * VITESSE)/
-			SIZE_CASE)] == 0)
+		/ SIZE_CASE)][(int)((e->data->pos_x + cos(rad(e->data->rot)) * VITESSE)
+		/ SIZE_CASE)] == 0)
 	{
 		e->data->pos_y += sin(rad(e->data->rot)) * VITESSE;
 		e->data->pos_x += cos(rad(e->data->rot)) * VITESSE;
@@ -27,8 +27,8 @@ int		on_key_up(t_env *e)
 int		on_key_down(t_env *e)
 {
 	if (e->data->map[(int)((e->data->pos_y - sin(rad(e->data->rot)) * VITESSE)
-		/ SIZE_CASE)][(int)((e->data->pos_x - cos(rad(e->data->rot)) * VITESSE)/
-			SIZE_CASE)] == 0)
+		/ SIZE_CASE)][(int)((e->data->pos_x - cos(rad(e->data->rot)) * VITESSE)
+		/ SIZE_CASE)] == 0)
 	{
 		e->data->pos_y -= sin(rad(e->data->rot)) * VITESSE;
 		e->data->pos_x -= cos(rad(e->data->rot)) * VITESSE;

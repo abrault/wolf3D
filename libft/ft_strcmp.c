@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/22 09:11:49 by abrault           #+#    #+#             */
-/*   Updated: 2013/11/29 13:29:05 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/12 14:33:18 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int ft_strcmp(const char * str1, const char * str2 )
 {
-	int     i;
-	int     result;
+	int		i;
+	int		result;
 
 	i = 0;
 	result = 0;

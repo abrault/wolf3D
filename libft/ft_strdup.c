@@ -6,17 +6,17 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/22 09:14:07 by abrault           #+#    #+#             */
-/*   Updated: 2013/11/28 16:49:46 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/12 14:33:56 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void    *ft_strdup(const char *str)
+void		*ft_strdup(const char *str)
 {
-	int	lenght;
+	int		lenght;
 	char	*new_string;
-	int	i;
+	int		i;
 
 	if (str == NULL)
 		return (NULL);

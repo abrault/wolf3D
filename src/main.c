@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:52:17 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/12 13:37:54 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/12 15:01:03 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int		main(int ac, char **av)
 
 	e = NULL;
 	if (ac != 2)
-		write(1, "usage : ./wolf3D <map>\n", 31);
+		write(1, "usage : ./wolf3D <map>\n", 23);
 	else
 	{
 		e = ini_env(e);

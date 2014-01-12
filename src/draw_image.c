@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/06 17:26:27 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/12 12:49:03 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/12 14:59:39 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,10 @@ int			find_dist(t_env *e, int rayon)
 	float	cosa;
 	float	sina;
 
-	angle = rad(e->data->rot - FOV / 2 +
-			(rayon * FOV / WIDTH_WINDOW));
+	angle = rad(e->data->rot - FOV / 2 + (rayon * FOV / WIDTH_WINDOW));
 	cosa = cos(angle);
 	sina = sin(angle);
-	angle = (e->data->rot - FOV / 2 +
-			(rayon * e->data->fov / WIDTH_WINDOW));
+	angle = (e->data->rot - FOV / 2 + (rayon * e->data->fov / WIDTH_WINDOW));
 	new_x = e->data->pos_x;
 	new_y = e->data->pos_y;
 	while (new_y <= (SIZE_CASE * e->data->nbr_line) && new_y >= 0 && new_x <=
@@ -88,8 +86,9 @@ int			find_dist(t_env *e, int rayon)
 						e->data->red = 240;
 					else
 						e->data->red = 200;
-				return (sqrt((e->data->pos_x - new_x) * (e->data->pos_x - new_x)
-						+ (e->data->pos_y - new_y) * (e->data->pos_y - new_y)));
+				return (sqrt(e->data->pos_x - new_x) *
+						(e->data->pos_x - new_x) + (e->data->pos_y - new_y)
+						* (e->data->pos_y - new_y));
 			}
 	}
 	return (0);

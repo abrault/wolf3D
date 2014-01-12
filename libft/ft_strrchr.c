@@ -6,13 +6,13 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/22 09:49:42 by abrault           #+#    #+#             */
-/*   Updated: 2013/11/29 14:57:20 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/12 14:35:38 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char    *ft_strrchr(const char *str, int c_ascii)
+char	*ft_strrchr(const char *str, int c_ascii)
 {
 	int	i;
 	int	j;
