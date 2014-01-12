@@ -6,25 +6,33 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/05 18:32:35 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/11 17:36:25 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/12 12:48:35 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf_head.h"
-
-#include <math.h>
+#include <wolf_head.h>
 
 int		on_key_up(t_env *e)
 {
-	e->data->pos_y += sin(e->data->rot * 3.14159265359 / 180) * 8;
-	e->data->pos_x += cos(e->data->rot * 3.14159265359 / 180) * 8;
+	if (e->data->map[(int)((e->data->pos_y + sin(rad(e->data->rot)) * VITESSE)
+		/ SIZE_CASE)][(int)((e->data->pos_x + cos(rad(e->data->rot)) * VITESSE)/
+			SIZE_CASE)] == 0)
+	{
+		e->data->pos_y += sin(rad(e->data->rot)) * VITESSE;
+		e->data->pos_x += cos(rad(e->data->rot)) * VITESSE;
+	}
 	return (0);
 }
 
 int		on_key_down(t_env *e)
 {
-	e->data->pos_y -= sin(e->data->rot * 3.14159265359 / 180) * 8;
-	e->data->pos_x -= cos(e->data->rot * 3.14159265359 / 180) * 8;
+	if (e->data->map[(int)((e->data->pos_y - sin(rad(e->data->rot)) * VITESSE)
+		/ SIZE_CASE)][(int)((e->data->pos_x - cos(rad(e->data->rot)) * VITESSE)/
+			SIZE_CASE)] == 0)
+	{
+		e->data->pos_y -= sin(rad(e->data->rot)) * VITESSE;
+		e->data->pos_x -= cos(rad(e->data->rot)) * VITESSE;
+	}
 	return (0);
 }
 

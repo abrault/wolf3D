@@ -6,12 +6,11 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/06 17:26:27 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/11 23:11:32 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/12 12:49:03 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf_head.h"
-#include <stdio.h>
+#include <wolf_head.h>
 
 void		horizontal(t_env *e, int x, int first_y, int second_y)
 {
@@ -103,7 +102,7 @@ void		draw_image(t_env *e)
 
 	rayon = 0;
 	draw_background(e);
-	e->data->dist_ecran = WIDTH_WINDOW / 2 / tan(30 * 3.141592653 / 180);
+	e->data->dist_ecran = WIDTH_WINDOW / 2 / tan(rad(30));
 	while (rayon < WIDTH_WINDOW)
 	{
 		dist = find_dist(e, rayon);

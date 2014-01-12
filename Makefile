@@ -6,16 +6,16 @@
 #    By: abrault <abrault@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/01/02 13:50:21 by abrault           #+#    #+#              #
-#    Updated: 2014/01/08 11:33:54 by abrault          ###   ########.fr        #
+#    Updated: 2014/01/12 12:58:00 by abrault          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = wolf3D
 
-SRC = main.c\
-	  command.c\
-	  draw_image.c
-	 # mlx_destroy_image.c\
+SRC = src/main.c\
+	  src/command.c\
+	  src/draw_image.c \
+	  src/ini.c
 
 LIB = libft/libft.a
 
@@ -38,7 +38,7 @@ $(LIB):
 	cd $(LIB_DIR) && $(MAKE)
 
 %.o: %.c
-	gcc -c $(CFLAGS) $< -o $@ -I . -I $(LIB_INC)
+	gcc -c $(CFLAGS) -I./include/ $< -o $@ -I . -I $(LIB_INC)
 
 clean:
 	cd $(LIB_DIR) && $(MAKE) clean
