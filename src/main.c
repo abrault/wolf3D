@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:52:17 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/12 16:58:41 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/13 13:46:13 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,16 @@ int		key_hook(int keycode, t_env *e)
 		on_key_up(e);
 	if (keycode == MLX_KEY_DOWN)
 		on_key_down(e);
+	if (keycode == 113)
+		e->data->map[(int)(e->data->pos_y / SIZE_CASE +
+						sin(ft_rad(e->data->rot)))]
+					[(int)(e->data->pos_x / SIZE_CASE +
+						cos(ft_rad(e->data->rot)))] = 1;
+	if (keycode == 119)
+		e->data->map[(int)(e->data->pos_y / SIZE_CASE +
+						sin(ft_rad(e->data->rot)))]
+					[(int)(e->data->pos_x / SIZE_CASE +
+						cos(ft_rad(e->data->rot)))] = 0;
 	draw_image(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->data->img, 0, 0);
 	return (0);

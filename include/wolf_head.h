@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:53:00 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/12 17:42:38 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/13 13:30:24 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@
 # define MLX_KEY_DOWN	65364
 # define MLX_KEY_LEFT	65361
 # define MLX_KEY_RIGHT	65363
+# define MLX_KEY_SPACE	32
 
 /*************************/
 /*        Typedef        */
