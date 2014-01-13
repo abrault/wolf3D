@@ -6,7 +6,7 @@
 #    By: abrault <abrault@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/01/02 13:50:21 by abrault           #+#    #+#              #
-#    Updated: 2014/01/12 17:40:58 by abrault          ###   ########.fr        #
+#    Updated: 2014/01/13 15:19:26 by abrault          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ LIB_DIR = libft
 
 OBJ = $(SRC:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -O3
 
 MFLAGS = -L/usr/X11/lib -lXext -lX11 -lmlx
 

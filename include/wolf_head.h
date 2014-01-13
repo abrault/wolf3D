@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:53:00 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/13 13:30:24 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/13 14:13:36 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 # define MLX_MAX_EVENT	LASTEvent
 # define SIZE_CASE		64
 # define PRECISION		5
-# define FOV			64
+# define FOV			60
 # define PI				3.14159265359
 # define VITESSE		15
 # define MLX_KEY_ESC	65307
