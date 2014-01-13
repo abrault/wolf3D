@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/06 17:26:27 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/13 15:19:01 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/13 16:55:19 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,16 @@ void		draw_background(t_env *e)
 
 int			find_dist(t_env *e, int rayon)
 {
-	float	new_x;
-	float	new_y;
-	float	angle;
-	float	cosa;
-	float	sina;
+	float		new_x;
+	float		new_y;
+	float		angle;
+	float		cosa;
+	float		sina;
 
-	angle = ft_rad(e->data->rot - FOV / 2.0 + (rayon * FOV / WIDTH_WINDOW));
-	cosa = cos(angle) / PRECISION;
-	sina = sin(angle) / PRECISION;
+	angle = ft_rad(e->data->rot - FOV / 2.0 + (rayon * 0.99 * FOV / WIDTH_WINDOW));
+	printf("%f\n", angle);
+	cosa = cos(angle) / 5;
+	sina = sin(angle) / 5;
 	new_x = e->data->pos_x;
 	new_y = e->data->pos_y;
 	while (new_y <= (SIZE_CASE * e->data->nbr_line) && new_y >= 0 && new_x <=
@@ -76,8 +77,8 @@ int			find_dist(t_env *e, int rayon)
 			else
 				e->data->direc = (sina > 0) ? 8 : 2;
 			new_y += sina;
-			if (e->data->map[(int)(floor(new_y / SIZE_CASE))]
-							[(int)(floor(new_x / SIZE_CASE))] == 1)
+			if (e->data->map[(int)(new_y / SIZE_CASE)]
+							[(int)(new_x / SIZE_CASE)] == 1)
 			{
 				return (sqrt((e->data->pos_x - new_x) * (e->data->pos_x - new_x)
 						+ (e->data->pos_y - new_y) * (e->data->pos_y - new_y)) *

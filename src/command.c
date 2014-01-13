@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/05 18:32:35 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/12 17:15:41 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/13 17:05:55 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int		on_key_up(t_env *e)
 {
-	if (e->data->map[(int)((e->data->pos_y + sin(ft_rad(e->data->rot)) * VITESSE * 2)
-		/ SIZE_CASE)][(int)((e->data->pos_x + cos(ft_rad(e->data->rot)) * VITESSE * 2)
+	if (e->data->map[(int)((e->data->pos_y + sin(ft_rad(e->data->rot)) * VITESSE)
+		/ SIZE_CASE)][(int)((e->data->pos_x + cos(ft_rad(e->data->rot)) * VITESSE)
 		/ SIZE_CASE)] == 0)
 	{
 		e->data->pos_y += sin(ft_rad(e->data->rot)) * VITESSE;
