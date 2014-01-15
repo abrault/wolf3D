@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:53:00 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/13 16:53:46 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/14 22:11:32 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@
 # define MLX_KEY_DOWN	65364
 # define MLX_KEY_LEFT	65361
 # define MLX_KEY_RIGHT	65363
-# define MLX_KEY_SPACE	32
 
 /*************************/
 /*        Typedef        */
@@ -61,6 +60,7 @@ typedef struct s_img		t_img;
 typedef struct s_env		t_env;
 typedef struct s_line		t_line;
 typedef struct s_point		t_point;
+typedef struct s_texture	t_texture;
 
 /*************************/
 /*       Structure       */
@@ -136,6 +136,9 @@ struct						s_data
 	float					dist_ecran;
 	t_img					*img;
 	char					**map;
+	int						id;
+	int						col;
+	t_texture				*texture;
 };
 
 struct						s_env
@@ -154,15 +157,9 @@ struct						s_point
 	int						red;
 };
 
-struct						s_line
+struct						s_texture
 {
-	int						first_x;
-	int						first_y;
-	int						second_x;
-	int						second_y;
-	int						red;
-	int						green;
-	int						blue;
+	t_img					*mur;
 };
 
 /*************************/
@@ -194,5 +191,7 @@ int							ini_map(t_env *e, char *file);
 void						draw_image(t_env *e);
 void						mlx_pixel_put_to_image(t_env *e, t_point *draw);
 void						get_color(t_env *e, float dist);
+void						load_texture(t_env *e, char *file);
+void						cpy_img(t_env *e, int x, int first_y, int second_y);
 
 #endif

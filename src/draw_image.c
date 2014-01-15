@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/06 17:26:27 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/13 16:55:19 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/14 23:39:19 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,26 +31,18 @@ void		horizontal(t_env *e, int x, int first_y, int second_y)
 	}
 }
 
-void		draw_background(t_env *e)
+void		draw_background(t_env *e, float dist, int rayon)
 {
-	t_point		point;
+	e->data->red = 90;
+	e->data->green = 183;
+	e->data->blue = 255;
 
-	point.y = 0;
-	point.red = 90;
-	point.green = 183;
-	point.blue = 255;
-	while (point.y < HEIGHT_WINDOW)
-	{
-		point.x = 0;
-		while (point.x < WIDTH_WINDOW)
-		{
-			mlx_pixel_put_to_image(e, &point);
-			point.x++;
-		}
-		point.y++;
-		if (point.y == HEIGHT_WINDOW / 2)
-			point.blue = 0;
-	}
+	dist = (HEIGHT_WINDOW - dist) / 2;
+	horizontal(e, WIDTH_WINDOW - rayon - 1, 0, dist);
+	horizontal(e, WIDTH_WINDOW - rayon - 2, 0, dist);
+	e->data->blue = 0;
+	horizontal(e, WIDTH_WINDOW - rayon - 1, HEIGHT_WINDOW - dist, HEIGHT_WINDOW);
+	horizontal(e, WIDTH_WINDOW - rayon - 2, HEIGHT_WINDOW - dist, HEIGHT_WINDOW);
 }
 
 int			find_dist(t_env *e, int rayon)
@@ -61,25 +53,31 @@ int			find_dist(t_env *e, int rayon)
 	float		cosa;
 	float		sina;
 
-	angle = ft_rad(e->data->rot - FOV / 2.0 + (rayon * 0.99 * FOV / WIDTH_WINDOW));
-	printf("%f\n", angle);
-	cosa = cos(angle) / 5;
-	sina = sin(angle) / 5;
+	angle = ft_rad(e->data->rot - FOV / 2 + (rayon * 0.9 * FOV / WIDTH_WINDOW));
+	cosa = cos(angle) / PRECISION;
+	sina = sin(angle) / PRECISION;
 	new_x = e->data->pos_x;
 	new_y = e->data->pos_y;
 	while (new_y <= (SIZE_CASE * e->data->nbr_line) && new_y >= 0 && new_x <=
 			(SIZE_CASE * e->data->nbr_col) && new_x >= 0)
 	{
 			new_x += cosa;
-			if (e->data->map[(int)(new_y / SIZE_CASE)]
-							[(int)(new_x / SIZE_CASE)] == 1)
-				e->data->direc = (cosa > 0) ? 6 : 4;
-			else
-				e->data->direc = (sina > 0) ? 8 : 2;
 			new_y += sina;
 			if (e->data->map[(int)(new_y / SIZE_CASE)]
 							[(int)(new_x / SIZE_CASE)] == 1)
 			{
+				if (e->data->map[(int)((new_y - sina) / SIZE_CASE)]
+								[(int)(new_x / SIZE_CASE)] != 0)
+					e->data->direc = (cosa > 0) ? 6 : 4;
+				else
+					e->data->direc = (sina > 0) ? 8 : 2;
+				e->data->id = e->data->map
+					[(int)((new_y - sina) / SIZE_CASE)]
+					[(int)(new_x / SIZE_CASE)];
+				if (e->data->direc == 6 || e->data->direc == 4)
+					e->data->col = (int)new_x - new_x / SIZE_CASE;
+				else
+					e->data->col = (int)new_y - new_y / SIZE_CASE;
 				return (sqrt((e->data->pos_x - new_x) * (e->data->pos_x - new_x)
 						+ (e->data->pos_y - new_y) * (e->data->pos_y - new_y)) *
 						cos(angle - ft_rad(e->data->rot)));
@@ -94,8 +92,6 @@ void		draw_image(t_env *e)
 	float	dist;
 
 	rayon = 0;
-	draw_background(e);
-	e->data->dist_ecran = (WIDTH_WINDOW / 2) / tan(ft_rad(30));
 	while (rayon < WIDTH_WINDOW)
 	{
 		dist = find_dist(e, rayon);
@@ -107,6 +103,7 @@ void		draw_image(t_env *e)
 					(dist / 2), HEIGHT_WINDOW / 2 + (dist / 2));
 			horizontal(e, WIDTH_WINDOW - rayon - 2, HEIGHT_WINDOW / 2 -
 					(dist / 2), HEIGHT_WINDOW / 2 + (dist / 2));
+			draw_background(e, dist, rayon);
 		}
 		rayon += 2;
 	}

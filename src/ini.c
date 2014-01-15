@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/12 12:19:22 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/12 17:12:51 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/14 18:16:13 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int		ini_data_and_img(t_env *e, char *file)
 			&(e->data->img->bpp),
 			&(e->data->img->size_line),
 			&(e->data->img->endian));
+	load_texture(e, "images/sandstone.xpm");
 	return (0);
 }
 
@@ -42,6 +43,8 @@ t_env	*ini_env(t_env *e)
 	e->mlx = malloc(sizeof(t_xvar));
 	e->win = malloc(sizeof(t_win_list));
 	e->data->img = malloc(sizeof(t_img));
+	e->data->texture = malloc(sizeof(t_texture));
+	e->data->texture->mur = malloc(sizeof(t_img));
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, WIDTH_WINDOW, HEIGHT_WINDOW, "Wolf 3D");
 	return (e);
@@ -74,6 +77,7 @@ int		get_dim_map(char *file, t_env *e)
 		write(1, "Incorrect file ...\n", 19);
 	return (0);
 }
+
 
 int		ini_map(t_env *e, char *file)
 {
