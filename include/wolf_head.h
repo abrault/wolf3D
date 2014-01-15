@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:53:00 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/15 11:34:56 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/15 17:38:33 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,6 @@
 
 # include <X11/X.h>
 # include <X11/Xlib.h>
-# include <X11/Xutil.h>
-# include <X11/Xos.h>
-# include <X11/Xatom.h>
-# include <X11/keysym.h>
-# include <X11/extensions/XShm.h>
-# include <sys/shm.h>
 
 # include "libft/libft.h"
 
@@ -37,19 +31,23 @@
 /*         Define        */
 /*************************/
 
-# define WIDTH_WINDOW	1000
-# define HEIGHT_WINDOW	800
-# define MLX_MAX_EVENT	LASTEvent
-# define SIZE_CASE		64
-# define PRECISION		10
-# define FOV			60
-# define PI				3.14159265359
-# define VITESSE		15
-# define MLX_KEY_ESC	65307
-# define MLX_KEY_UP		65362
-# define MLX_KEY_DOWN	65364
-# define MLX_KEY_LEFT	65361
-# define MLX_KEY_RIGHT	65363
+# define W_WIN					1000
+# define H_WIN					800
+# define MLX_MAX_EVENT			LASTEvent
+# define SIZE_CASE				64
+# define PRECISION				10
+# define FOV					60
+# define PI						3.14159265359
+# define VITESSE				15
+# define MLX_KEY_ESC			65307
+# define MLX_KEY_UP				65362
+# define MLX_KEY_DOWN			65364
+# define MLX_KEY_LEFT			65363
+# define MLX_KEY_RIGHT			65361
+# define MLX_KEY_PLACE_BLOCK	113
+# define MLX_KEY_DELETE_BLOCK	119
+# define MLX_KEY_SPACE			32
+# define NB_TEXTURE				12
 
 /*************************/
 /*        Typedef        */
@@ -118,7 +116,6 @@ struct						s_img
 	int						format;
 	char					*data;
 	int						endian;
-	XShmSegmentInfo			shm;
 };
 
 struct						s_data
@@ -171,6 +168,10 @@ int							on_key_up(t_env *e);
 int							on_key_down(t_env *e);
 int							on_key_left(t_env *e);
 int							on_key_right(t_env *e);
+int							special_key(t_env *e, int keycode);
+
+/* Special Block */
+int							use_lever(t_env *e, int id);
 
 /* Tools */
 float						ft_rad(float degre);
@@ -186,12 +187,14 @@ int							ini_data_and_img(t_env *e, char *file);
 int							get_map(char *file, t_env *e);
 int							get_dim_map(char *file, t_env *e);
 int							ini_map(t_env *e, char *file);
+void						ini_texture(t_env *e);
 
-/* Draw */
+/* Image */
 void						draw_image(t_env *e);
 void						mlx_pixel_put_to_image(t_env *e, t_point *draw);
 void						get_color(t_env *e, float dist);
 t_img						*load_texture(t_env *e, char *file);
 void						cpy_img(t_env *e, int x, int first_y, int second_y);
+void						cpy_all_img(t_env *e, t_img *img, int x, int y);
 
 #endif

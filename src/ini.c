@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/12 12:19:22 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/15 11:32:12 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/15 17:38:31 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int		ini_data_and_img(t_env *e, char *file)
 {
-	e->data->pos_x = SIZE_CASE * 5;
-	e->data->pos_y = SIZE_CASE * 5;
+	e->data->pos_x = SIZE_CASE * 2;
+	e->data->pos_y = SIZE_CASE * 2;
 	e->data->rot = 90;
 	e->data->red = 0;
 	e->data->green = 0;
@@ -23,24 +23,30 @@ int		ini_data_and_img(t_env *e, char *file)
 	if (!get_dim_map(file, e))
 		exit(0);
 	ini_map(e, file);
-	e->data->dist_ecran = WIDTH_WINDOW / 2 / tan(ft_rad(FOV / 2));
-	e->data->img->width = WIDTH_WINDOW;
-	e->data->img->height = HEIGHT_WINDOW;
-	e->data->img = mlx_new_image(e->mlx, WIDTH_WINDOW, HEIGHT_WINDOW);
+	e->data->dist_ecran = W_WIN / 2 / tan(ft_rad(FOV / 2));
+	e->data->img = mlx_new_image(e->mlx, W_WIN, H_WIN);
 	e->data->img->data = mlx_get_data_addr(
 			e->data->img,
 			&(e->data->img->bpp),
 			&(e->data->img->size_line),
 			&(e->data->img->endian));
-	e->data->texture->id[1] = load_texture(e, "images/sandstone.xpm");
+	ini_texture(e);
+	return (0);
+}
+
+void	ini_texture(t_env *e)
+{
+	e->data->texture->id[1] = load_texture(e, "images/stonebrick.xpm");
 	e->data->texture->id[2] = load_texture(e, "images/pumpkinfaceoff.xpm");
 	e->data->texture->id[3] = load_texture(e, "images/pumpkinfaceon.xpm");
 	e->data->texture->id[4] = load_texture(e, "images/redstonelampe.xpm");
 	e->data->texture->id[5] = load_texture(e, "images/wood.xpm");
-	e->data->texture->id[6] = load_texture(e, "images/stonebrick.xpm");
+	e->data->texture->id[6] = load_texture(e, "images/sandstone.xpm");
 	e->data->texture->id[7] = load_texture(e, "images/stoneslab.xpm");
 	e->data->texture->id[8] = load_texture(e, "images/stonebrickmossy.xpm");
-	return (0);
+	e->data->texture->id[9] = load_texture(e, "images/leveractif.xpm");
+	e->data->texture->id[10] = load_texture(e, "images/leverinactif.xpm");
+	e->data->texture->id[11] = load_texture(e, "images/barre.xpm");
 }
 
 t_env	*ini_env(t_env *e)
@@ -54,14 +60,14 @@ t_env	*ini_env(t_env *e)
 	e->win = malloc(sizeof(t_win_list));
 	e->data->img = malloc(sizeof(t_img));
 	e->data->texture = malloc(sizeof(t_texture));
-	e->data->texture->id = malloc(sizeof(t_img*) * 9);
-	while (y < 9)
+	e->data->texture->id = malloc(sizeof(t_img*) * NB_TEXTURE);
+	while (y < NB_TEXTURE)
 	{
 		e->data->texture->id[y] = malloc(sizeof(t_img));
 		y++;
 	}
 	e->mlx = mlx_init();
-	e->win = mlx_new_window(e->mlx, WIDTH_WINDOW, HEIGHT_WINDOW, "Wolf 3D");
+	e->win = mlx_new_window(e->mlx, W_WIN, H_WIN, "Wolf 3D");
 	return (e);
 }
 

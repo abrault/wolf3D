@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:52:17 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/15 11:32:09 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/15 17:38:26 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,16 @@ int		key_hook(int keycode, t_env *e)
 {
 	if (keycode == MLX_KEY_ESC)
 		exit(0);
-	if (keycode == MLX_KEY_LEFT)
+	else if (keycode == MLX_KEY_LEFT)
 		on_key_left(e);
-	if (keycode == MLX_KEY_RIGHT)
+	else if (keycode == MLX_KEY_RIGHT)
 		on_key_right(e);
-	if (keycode == MLX_KEY_UP)
+	else if (keycode == MLX_KEY_UP)
 		on_key_up(e);
-	if (keycode == MLX_KEY_DOWN)
+	else if (keycode == MLX_KEY_DOWN)
 		on_key_down(e);
-	if (keycode == 113)
-		e->data->map[(int)(e->data->pos_y / SIZE_CASE +
-						sin(ft_rad(e->data->rot)))]
-					[(int)(e->data->pos_x / SIZE_CASE +
-						cos(ft_rad(e->data->rot)))] = 1;
-	if (keycode == 119)
-		e->data->map[(int)(e->data->pos_y / SIZE_CASE +
-						sin(ft_rad(e->data->rot)))]
-					[(int)(e->data->pos_x / SIZE_CASE +
-						cos(ft_rad(e->data->rot)))] = 0;
+	else
+		special_key(e, keycode);
 	draw_image(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->data->img, 0, 0);
 	return (0);
