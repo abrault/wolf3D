@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:53:00 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/14 22:11:32 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/15 11:34:56 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@
 /*         Define        */
 /*************************/
 
-# define WIDTH_WINDOW	1400
-# define HEIGHT_WINDOW	900
+# define WIDTH_WINDOW	1000
+# define HEIGHT_WINDOW	800
 # define MLX_MAX_EVENT	LASTEvent
 # define SIZE_CASE		64
 # define PRECISION		10
@@ -159,7 +159,7 @@ struct						s_point
 
 struct						s_texture
 {
-	t_img					*mur;
+	t_img					**id;
 };
 
 /*************************/
@@ -191,7 +191,7 @@ int							ini_map(t_env *e, char *file);
 void						draw_image(t_env *e);
 void						mlx_pixel_put_to_image(t_env *e, t_point *draw);
 void						get_color(t_env *e, float dist);
-void						load_texture(t_env *e, char *file);
+t_img						*load_texture(t_env *e, char *file);
 void						cpy_img(t_env *e, int x, int first_y, int second_y);
 
 #endif

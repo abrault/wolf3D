@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/06 17:26:27 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/14 23:39:19 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/15 11:50:30 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,25 +64,27 @@ int			find_dist(t_env *e, int rayon)
 			new_x += cosa;
 			new_y += sina;
 			if (e->data->map[(int)(new_y / SIZE_CASE)]
-							[(int)(new_x / SIZE_CASE)] == 1)
+							[(int)(new_x / SIZE_CASE)] != 0)
 			{
 				if (e->data->map[(int)((new_y - sina) / SIZE_CASE)]
 								[(int)(new_x / SIZE_CASE)] != 0)
+				{
+					e->data->col = (int)new_y % SIZE_CASE;
 					e->data->direc = (cosa > 0) ? 6 : 4;
+				}
 				else
+				{
 					e->data->direc = (sina > 0) ? 8 : 2;
-				e->data->id = e->data->map
-					[(int)((new_y - sina) / SIZE_CASE)]
+					e->data->col = (int)new_x % SIZE_CASE;
+				}
+				e->data->id = e->data->map[(int)((new_y) / SIZE_CASE)]
 					[(int)(new_x / SIZE_CASE)];
-				if (e->data->direc == 6 || e->data->direc == 4)
-					e->data->col = (int)new_x - new_x / SIZE_CASE;
-				else
-					e->data->col = (int)new_y - new_y / SIZE_CASE;
 				return (sqrt((e->data->pos_x - new_x) * (e->data->pos_x - new_x)
 						+ (e->data->pos_y - new_y) * (e->data->pos_y - new_y)) *
 						cos(angle - ft_rad(e->data->rot)));
 			}
 	}
+	e->data->id = 0;
 	return (0);
 }
 
@@ -99,12 +101,10 @@ void		draw_image(t_env *e)
 		get_color(e, dist);
 		if (dist != 0)
 		{
-			horizontal(e, WIDTH_WINDOW - rayon - 1, HEIGHT_WINDOW / 2 -
-					(dist / 2), HEIGHT_WINDOW / 2 + (dist / 2));
-			horizontal(e, WIDTH_WINDOW - rayon - 2, HEIGHT_WINDOW / 2 -
+			cpy_img(e, WIDTH_WINDOW - rayon - 1, HEIGHT_WINDOW / 2 -
 					(dist / 2), HEIGHT_WINDOW / 2 + (dist / 2));
 			draw_background(e, dist, rayon);
 		}
-		rayon += 2;
+		rayon++;
 	}
 }

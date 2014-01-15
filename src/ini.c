@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/12 12:19:22 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/14 18:16:13 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/15 11:32:12 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,34 @@ int		ini_data_and_img(t_env *e, char *file)
 			&(e->data->img->bpp),
 			&(e->data->img->size_line),
 			&(e->data->img->endian));
-	load_texture(e, "images/sandstone.xpm");
+	e->data->texture->id[1] = load_texture(e, "images/sandstone.xpm");
+	e->data->texture->id[2] = load_texture(e, "images/pumpkinfaceoff.xpm");
+	e->data->texture->id[3] = load_texture(e, "images/pumpkinfaceon.xpm");
+	e->data->texture->id[4] = load_texture(e, "images/redstonelampe.xpm");
+	e->data->texture->id[5] = load_texture(e, "images/wood.xpm");
+	e->data->texture->id[6] = load_texture(e, "images/stonebrick.xpm");
+	e->data->texture->id[7] = load_texture(e, "images/stoneslab.xpm");
+	e->data->texture->id[8] = load_texture(e, "images/stonebrickmossy.xpm");
 	return (0);
 }
 
 t_env	*ini_env(t_env *e)
 {
+	int		y;
+
+	y = 0;
 	e = malloc(sizeof(t_env));
 	e->data = malloc(sizeof(t_data));
 	e->mlx = malloc(sizeof(t_xvar));
 	e->win = malloc(sizeof(t_win_list));
 	e->data->img = malloc(sizeof(t_img));
 	e->data->texture = malloc(sizeof(t_texture));
-	e->data->texture->mur = malloc(sizeof(t_img));
+	e->data->texture->id = malloc(sizeof(t_img*) * 9);
+	while (y < 9)
+	{
+		e->data->texture->id[y] = malloc(sizeof(t_img));
+		y++;
+	}
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, WIDTH_WINDOW, HEIGHT_WINDOW, "Wolf 3D");
 	return (e);

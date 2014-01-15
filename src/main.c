@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:52:17 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/14 20:45:29 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/15 11:32:09 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int		key_hook(int keycode, t_env *e)
 						cos(ft_rad(e->data->rot)))] = 0;
 	draw_image(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->data->img, 0, 0);
-	mlx_put_image_to_window(e->mlx, e->win, e->data->texture->mur, 0, 0);
 	return (0);
 }
 
