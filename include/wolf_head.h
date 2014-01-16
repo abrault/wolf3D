@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:53:00 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/15 21:20:25 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/16 10:26:33 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@
 # define MLX_KEY_PLACE_BLOCK	113
 # define MLX_KEY_DELETE_BLOCK	119
 # define MLX_KEY_SPACE			32
-# define NB_TEXTURE				12
+# define NB_TEXTURE				13
 
 /*************************/
 /*        Typedef        */
@@ -192,9 +192,9 @@ void						ini_texture(t_env *e);
 /* Image */
 void						draw_image(t_env *e);
 void						mlx_pixel_put_to_image(t_env *e, t_point *draw);
-void						get_color(t_env *e, float dist);
+void						get_color(t_env *e);
 t_img						*load_texture(t_env *e, char *file);
-void						cpy_img(t_env *e, int x, int first_y, int second_y);
+void						cpy_img(t_env *e, int x, int dist, t_img *img);
 void						cpy_all_img(t_env *e, t_img *img, int x, int y);
 
 #endif

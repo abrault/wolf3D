@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/12 13:05:00 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/12 13:55:18 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/16 10:47:02 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,18 @@ int		get_map(char *file, t_env *e)
 	int		fd;
 
 	y = 0;
-	if ((fd = open(file, O_RDONLY)))
+	fd = open(file, O_RDONLY);
+	while (get_next_line(fd, &line))
 	{
-		while (get_next_line(fd, &line))
+		x = 0;
+		tok = ft_strtok(line, ' ');
+		while (tok)
 		{
-			x = 0;
-			tok = ft_strtok(line, ' ');
-			while (tok)
-			{
-				e->data->map[y][x] = ft_atoi(tok);
-				tok = ft_strtok(NULL, ' ');
-				x++;
-			}
-			y++;
+			e->data->map[y][x] = ft_atoi(tok);
+			tok = ft_strtok(NULL, ' ');
+			x++;
 		}
+		y++;
 	}
-	else
-		write(1, "Incorrect file ...\n", 31);
 	return (0);
 }
