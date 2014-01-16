@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:53:00 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/16 10:26:33 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/16 11:35:39 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_env		t_env;
 typedef struct s_line		t_line;
 typedef struct s_point		t_point;
 typedef struct s_texture	t_texture;
+typedef struct s_tempvar	t_tempvar;
 
 /*************************/
 /*       Structure       */
@@ -136,6 +137,7 @@ struct						s_data
 	int						id;
 	int						col;
 	t_texture				*texture;
+	int						item_select;
 };
 
 struct						s_env
@@ -157,6 +159,15 @@ struct						s_point
 struct						s_texture
 {
 	t_img					**id;
+};
+
+struct						s_tempvar
+{
+	float					new_x;
+	float					new_y;
+	float					angle;
+	float					cosa;
+	float					sina;
 };
 
 /*************************/
@@ -196,5 +207,6 @@ void						get_color(t_env *e);
 t_img						*load_texture(t_env *e, char *file);
 void						cpy_img(t_env *e, int x, int dist, t_img *img);
 void						cpy_all_img(t_env *e, t_img *img, int x, int y);
+void						draw_gui(t_env *e);
 
 #endif

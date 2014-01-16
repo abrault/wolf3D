@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/14 16:50:42 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/16 10:58:19 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/16 13:11:04 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,8 @@ void	cpy_img(t_env *e, int x, int dist, t_img *img)
 		p.blue = img->data[e->data->col + i++ + y_img];
 		p.green = img->data[e->data->col + i++ + y_img];
 		p.red = img->data[e->data->col + i++ + y_img];
-		if (p.x >= 0 && p.x <= W_WIN && p.y >= 0 && p.y <=
-				H_WIN && p.red != 0 &&
-				p.green != 0 && p.blue != 0)
+		if (p.x >= 0 && p.x <= W_WIN && p.y >= 0 && p.y <= H_WIN && p.red != 0
+				&& p.green != 0 && p.blue != 0)
 			mlx_pixel_put_to_image(e, &p);
 		p.y++;
 	}
@@ -59,8 +58,8 @@ void	cpy_all_img(t_env *e, t_img *img, int x, int y)
 			p.blue = img->data[pas_x + i++ + pas_y];
 			p.green = img->data[pas_x + i++ + pas_y];
 			p.red = img->data[pas_x + i++ + pas_y];
-			if (p.x >= 0 && p.x <= W_WIN && p.y >= 0 && p.y <=
-					H_WIN && p.red != 0 && p.green != 255 && p.blue != 0)
+			if (p.x >= 0 && p.x <= W_WIN && p.y >= 0 && p.y <= H_WIN
+					&& p.red > 0 && p.green == 0 && p.blue > 0)
 			mlx_pixel_put_to_image(e, &p);
 			p.x++;
 		}

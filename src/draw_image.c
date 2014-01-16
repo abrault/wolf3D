@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/06 17:26:27 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/16 11:20:49 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/16 13:11:06 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void		draw_background(t_env *e, float dist, int rayon)
 	e->data->green = 183;
 	e->data->blue = 255;
 	dist = (H_WIN - dist) / 2;
-	horizontal(e, rayon - 1, 0, dist);
+	horizontal(e, rayon, 0, dist + 1);
 	e->data->blue = 0;
-	horizontal(e, rayon - 1, H_WIN - dist, H_WIN);
+	horizontal(e, rayon, H_WIN - dist - 1, H_WIN);
 }
 
 static int	find_dist_work(t_env *e, t_tempvar *temp)
@@ -69,11 +69,9 @@ int			find_dist(t_env *e, int rayon)
 	temp.sina = sin(temp.angle) / PRECISION;
 	temp.new_x = e->data->pos_x;
 	temp.new_y = e->data->pos_y;
-	while (temp.new_y <= (SIZE_CASE * e->data->nbr_line) && temp.new_y >= 0 &&
+	while (temp.new_y >= 0 && temp.new_y <= (SIZE_CASE * e->data->nbr_line) &&
 			temp.new_x <= (SIZE_CASE * e->data->nbr_col) && temp.new_x >= 0)
 	{
-		temp.new_x += temp.cosa;
-		temp.new_y += temp.sina;
 		if (e->data->map[(int)(temp.new_y / SIZE_CASE)]
 						[(int)(temp.new_x / SIZE_CASE)] != 0)
 		{
@@ -82,6 +80,8 @@ int			find_dist(t_env *e, int rayon)
 			temp.new_x) + (e->data->pos_y - temp.new_y) * (e->data->pos_y -
 			temp.new_y)) * cos(temp.angle - ft_rad(e->data->rot)));
 		}
+		temp.new_x += temp.cosa;
+		temp.new_y += temp.sina;
 	}
 	e->data->id = 0;
 	return (0);
@@ -100,10 +100,11 @@ void		draw_image(t_env *e)
 		get_color(e);
 		if (dist != 0)
 		{
+			//horizontal(e, rayon, H_WIN / 2 - dist / 2, H_WIN / 2 + dist / 2)
 			cpy_img(e, rayon, dist, e->data->texture->id[e->data->id]);
 			draw_background(e, dist, rayon);
 		}
 		rayon++;
 	}
-	cpy_all_img(e, e->data->texture->id[11], 200, H_WIN - 100);
+	//draw_gui(e);
 }

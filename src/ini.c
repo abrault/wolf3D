@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/12 12:19:22 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/16 10:38:21 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/16 11:35:46 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int		ini_data_and_img(t_env *e, char *file)
 	e->data->red = 0;
 	e->data->green = 0;
 	e->data->blue = 0;
+	e->data->item_select = 0;
 	if (!get_dim_map(file, e))
 	{
 		write(1, "Incorrect file ...\n", 19);
