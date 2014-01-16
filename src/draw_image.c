@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/06 17:26:27 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/16 07:02:53 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/16 11:20:49 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,44 +42,46 @@ void		draw_background(t_env *e, float dist, int rayon)
 	horizontal(e, rayon - 1, H_WIN - dist, H_WIN);
 }
 
+static int	find_dist_work(t_env *e, t_tempvar *temp)
+{
+	if (e->data->map[(int)((temp->new_y - temp->sina) / SIZE_CASE)]
+					[(int)(temp->new_x / SIZE_CASE)] != 0)
+	{
+		e->data->col = (int)temp->new_y % SIZE_CASE;
+		e->data->direc = (temp->cosa > 0) ? 6 : 4;
+	}
+	else
+	{
+		e->data->col = (int)temp->new_x % SIZE_CASE;
+		e->data->direc = (temp->sina > 0) ? 8 : 2;
+	}
+	e->data->id = e->data->map[(int)((temp->new_y) / SIZE_CASE)]
+								[(int)(temp->new_x / SIZE_CASE)];
+	return (0);
+}
+
 int			find_dist(t_env *e, int rayon)
 {
-	float		new_x;
-	float		new_y;
-	float		angle;
-	float		cosa;
-	float		sina;
+	t_tempvar	temp;
 
-	angle = ft_rad(e->data->rot - FOV / 2 + (rayon * 0.9 * FOV / W_WIN));
-	cosa = cos(angle) / PRECISION;
-	sina = sin(angle) / PRECISION;
-	new_x = e->data->pos_x;
-	new_y = e->data->pos_y;
-	while (new_y <= (SIZE_CASE * e->data->nbr_line) && new_y >= 0 && new_x <=
-			(SIZE_CASE * e->data->nbr_col) && new_x >= 0)
+	temp.angle = ft_rad(e->data->rot - FOV / 2 + (rayon * 0.9 * FOV / W_WIN));
+	temp.cosa = cos(temp.angle) / PRECISION;
+	temp.sina = sin(temp.angle) / PRECISION;
+	temp.new_x = e->data->pos_x;
+	temp.new_y = e->data->pos_y;
+	while (temp.new_y <= (SIZE_CASE * e->data->nbr_line) && temp.new_y >= 0 &&
+			temp.new_x <= (SIZE_CASE * e->data->nbr_col) && temp.new_x >= 0)
 	{
-		new_x += cosa;
-		new_y += sina;
-		if (e->data->map[(int)(new_y / SIZE_CASE)]
-				[(int)(new_x / SIZE_CASE)] != 0)
+		temp.new_x += temp.cosa;
+		temp.new_y += temp.sina;
+		if (e->data->map[(int)(temp.new_y / SIZE_CASE)]
+						[(int)(temp.new_x / SIZE_CASE)] != 0)
 		{
-			if (e->data->map[(int)((new_y - sina) / SIZE_CASE)]
-							[(int)(new_x / SIZE_CASE)] != 0)
-			{
-				e->data->col = (int)new_y % SIZE_CASE;
-				e->data->direc = (cosa > 0) ? 6 : 4;
-			}
-			else
-			{
-				e->data->col = (int)new_x % SIZE_CASE;
-				e->data->direc = (sina > 0) ? 8 : 2;
-			}
-			e->data->id = e->data->map[(int)((new_y) / SIZE_CASE)]
-				[(int)(new_x / SIZE_CASE)];
-			return (sqrt((e->data->pos_x - new_x) * (e->data->pos_x - new_x) +
-				(e->data->pos_y - new_y) * (e->data->pos_y - new_y)) * cos(angle
-				- ft_rad(e->data->rot)));
-			}
+			find_dist_work(e, &temp);
+			return (sqrt((e->data->pos_x - temp.new_x) * (e->data->pos_x -
+			temp.new_x) + (e->data->pos_y - temp.new_y) * (e->data->pos_y -
+			temp.new_y)) * cos(temp.angle - ft_rad(e->data->rot)));
+		}
 	}
 	e->data->id = 0;
 	return (0);
@@ -95,10 +97,10 @@ void		draw_image(t_env *e)
 	{
 		dist = find_dist(e, rayon);
 		dist = SIZE_CASE / dist * e->data->dist_ecran;
-		get_color(e, dist);
+		get_color(e);
 		if (dist != 0)
 		{
-			cpy_img(e, rayon, H_WIN / 2 - (dist / 2), H_WIN / 2 + (dist / 2));
+			cpy_img(e, rayon, dist, e->data->texture->id[e->data->id]);
 			draw_background(e, dist, rayon);
 		}
 		rayon++;
