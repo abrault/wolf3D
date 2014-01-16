@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/06 17:26:27 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/15 17:38:29 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/16 07:02:53 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,5 @@ void		draw_image(t_env *e)
 		}
 		rayon++;
 	}
-	cpy_all_img(e, e->data->texture->id[11], 0, 0);
+	cpy_all_img(e, e->data->texture->id[11], 200, H_WIN - 100);
 }

@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:53:00 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/15 17:38:33 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/15 21:20:25 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 /*         Define        */
 /*************************/
 
-# define W_WIN					1000
+# define W_WIN					1100
 # define H_WIN					800
 # define MLX_MAX_EVENT			LASTEvent
 # define SIZE_CASE				64

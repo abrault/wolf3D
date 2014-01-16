@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/14 16:50:42 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/15 17:38:23 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/16 07:03:00 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ void	cpy_all_img(t_env *e, t_img *img, int x, int y)
 		pas_y = (point.y - y) * img->size_line;
 		while (point.x - x < img->width)
 		{
-			pas_x = (point.x - x) / 2 * img->bpp / 8;
-
+			pas_x = (point.x - x) / 4 * img->bpp / 8;
 			point.blue = img->data[pas_x + i++ + pas_y];
 			point.green = img->data[pas_x + i++ + pas_y];
 			point.red = img->data[pas_x + i++ + pas_y];
 			if (point.x >= 0 && point.x <= W_WIN
-				&& point.y >= 0 && point.y <= H_WIN)
+				&& point.y >= 0 && point.y <= H_WIN && point.red != 0
+				&& point.green != 255 && point.blue != 0)
 			mlx_pixel_put_to_image(e, &point);
 			point.x++;
 		}
