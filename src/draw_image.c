@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/06 17:26:27 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/17 17:38:32 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/17 18:30:16 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void		draw_background(t_env *e, float dist, int rayon)
 	e->data->green = 183;
 	e->data->blue = 255;
 	dist = (H_WIN - dist) / 2;
-	horizontal(e, rayon, 0, dist + 1);
+	horizontal(e, rayon, 0, H_WIN / 2);
 	e->data->blue = 0;
-	horizontal(e, rayon, H_WIN - dist - 1, H_WIN);
+	horizontal(e, rayon, H_WIN / 2, H_WIN);
 }
 
 static int	find_dist_work(t_env *e, t_tempvar *temp)
@@ -99,9 +99,9 @@ void		draw_image(t_env *e)
 		get_color(e);
 		if (dist != 0)
 		{
+			draw_background(e, dist, rayon);
 			/*horizontal(e, rayon, H_WIN / 2 - dist / 2, H_WIN / 2 + dist / 2);
 			*/cpy_img(e, rayon, dist, e->data->texture->id[e->data->id]);
-			draw_background(e, dist, rayon);
 		}
 		rayon++;
 	}

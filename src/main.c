@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:52:17 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/17 16:59:32 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/17 19:04:56 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ int		key_hook(int keycode, t_env *e)
 		on_key_up(e);
 	else if (keycode == MLX_KEY_DOWN)
 		on_key_down(e);
-	else
+	else if (e->data->map[(int)(e->data->pos_y / SIZE_CASE + sin(ft_rad(
+			e->data->rot)))][(int)(e->data->pos_x / SIZE_CASE + cos(ft_rad(
+			e->data->rot)))] != 1)
 		special_key(e, keycode);
 	draw_image(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->data->img, 0, 0);

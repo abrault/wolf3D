@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:53:00 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/17 17:42:27 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/17 18:07:57 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@
 # define MLX_KEY_SPACE			32
 # define MLX_KEY_CUBE_LEFT		49
 # define MLX_KEY_CUBE_RIGHT		52
-# define NB_TEXTURE				13
+# define NB_TEXTURE				16
 
 /*************************/
 /*        Typedef        */

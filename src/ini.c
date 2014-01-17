@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/12 12:19:22 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/17 17:41:23 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/17 18:14:18 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int		ini_data_and_img(t_env *e, char *file)
 {
-	e->data->pos_x = SIZE_CASE * 2;
-	e->data->pos_y = SIZE_CASE * 2;
+	e->data->pos_x = SIZE_CASE * 4;
+	e->data->pos_y = SIZE_CASE * 4;
 	e->data->rot = 90;
 	e->data->red = 0;
 	e->data->green = 0;
@@ -38,7 +38,7 @@ int		ini_data_and_img(t_env *e, char *file)
 
 void	ini_texture(t_env *e)
 {
-	e->data->texture->id[1] = load_texture(e, "images/stonebrick.xpm");
+	e->data->texture->id[1] = load_texture(e, "images/bedrock.xpm");
 	e->data->texture->id[2] = load_texture(e, "images/pumpkinfaceoff.xpm");
 	e->data->texture->id[3] = load_texture(e, "images/pumpkinfaceon.xpm");
 	e->data->texture->id[4] = load_texture(e, "images/redstonelampe.xpm");
@@ -50,6 +50,11 @@ void	ini_texture(t_env *e)
 	e->data->texture->id[10] = load_texture(e, "images/leverinactif.xpm");
 	e->data->texture->id[11] = load_texture(e, "images/barre.xpm");
 	e->data->texture->id[12] = load_texture(e, "images/select.xpm");
+	e->data->texture->id[13] = load_texture(e, "images/stonebrick.xpm");
+	e->data->texture->id[14] = load_texture(e,
+			"images/doubleplantrosebottom.xpm");
+	e->data->texture->id[15] = load_texture(e,
+			"images/doorwoodupper.xpm");
 }
 
 t_env	*ini_env(t_env *e)

@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/17 16:12:55 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/17 16:21:13 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/17 17:57:19 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		ini_inv(t_env *e)
 {
 	e->data->inv = malloc(sizeof(char) * 9);
-	e->data->inv[0] = 1;
+	e->data->inv[0] = 13;
 	e->data->inv[1] = 2;
 	e->data->inv[2] = 3;
 	e->data->inv[3] = 4;
