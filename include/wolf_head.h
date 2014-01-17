@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:53:00 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/16 11:35:39 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/17 17:42:27 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,11 @@
 # define MLX_KEY_DOWN			65364
 # define MLX_KEY_LEFT			65363
 # define MLX_KEY_RIGHT			65361
-# define MLX_KEY_PLACE_BLOCK	113
-# define MLX_KEY_DELETE_BLOCK	119
+# define MLX_KEY_PLACE_BLOCK	50
+# define MLX_KEY_DELETE_BLOCK	51
 # define MLX_KEY_SPACE			32
+# define MLX_KEY_CUBE_LEFT		49
+# define MLX_KEY_CUBE_RIGHT		52
 # define NB_TEXTURE				13
 
 /*************************/
@@ -138,6 +140,7 @@ struct						s_data
 	int						col;
 	t_texture				*texture;
 	int						item_select;
+	char					*inv;
 };
 
 struct						s_env
@@ -199,14 +202,18 @@ int							get_map(char *file, t_env *e);
 int							get_dim_map(char *file, t_env *e);
 int							ini_map(t_env *e, char *file);
 void						ini_texture(t_env *e);
+int							ini_inv(t_env *e);
 
 /* Image */
 void						draw_image(t_env *e);
 void						mlx_pixel_put_to_image(t_env *e, t_point *draw);
+void						mlx_pixel_put_to_image_sec(t_env *e,
+		t_point *draw);
 void						get_color(t_env *e);
 t_img						*load_texture(t_env *e, char *file);
 void						cpy_img(t_env *e, int x, int dist, t_img *img);
 void						cpy_all_img(t_env *e, t_img *img, int x, int y);
 void						draw_gui(t_env *e);
+void						cpy_block_i(t_env *e, int x, int dist, t_img *img);
 
 #endif

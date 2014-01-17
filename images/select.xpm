@@ -190,7 +190,7 @@ static char *select[] = {
 ".X c #FC2400",
 "XX c #FD2500",
 "oX c #FE2400",
-"OX c #FFFF00",
+"OX c #FE0101",
 "+X c #00F900",
 "@X c None",
 /* pixels */

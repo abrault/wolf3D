@@ -6,12 +6,11 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/06 17:26:27 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/16 13:11:06 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/17 17:38:32 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <wolf_head.h>
-#include <stdio.h>
 
 void		horizontal(t_env *e, int x, int first_y, int second_y)
 {
@@ -100,11 +99,11 @@ void		draw_image(t_env *e)
 		get_color(e);
 		if (dist != 0)
 		{
-			//horizontal(e, rayon, H_WIN / 2 - dist / 2, H_WIN / 2 + dist / 2)
-			cpy_img(e, rayon, dist, e->data->texture->id[e->data->id]);
+			/*horizontal(e, rayon, H_WIN / 2 - dist / 2, H_WIN / 2 + dist / 2);
+			*/cpy_img(e, rayon, dist, e->data->texture->id[e->data->id]);
 			draw_background(e, dist, rayon);
 		}
 		rayon++;
 	}
-	//draw_gui(e);
+	draw_gui(e);
 }

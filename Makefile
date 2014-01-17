@@ -6,7 +6,7 @@
 #    By: abrault <abrault@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/01/02 13:50:21 by abrault           #+#    #+#              #
-#    Updated: 2014/01/16 11:28:49 by abrault          ###   ########.fr        #
+#    Updated: 2014/01/17 17:32:13 by abrault          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRC = src/main.c\
 	  src/draw_texture.c \
 	  src/special_key.c \
 	  src/special_block.c \
-	  src/draw_gui.c
+	  src/draw_gui.c \
+	  src/ini_inv.c
 
 LIB = libft/libft.a
 

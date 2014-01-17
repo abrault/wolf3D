@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/12 12:19:22 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/16 11:35:46 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/17 17:41:23 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		ini_data_and_img(t_env *e, char *file)
 	e->data->red = 0;
 	e->data->green = 0;
 	e->data->blue = 0;
-	e->data->item_select = 0;
+	e->data->item_select = 7;
 	if (!get_dim_map(file, e))
 	{
 		write(1, "Incorrect file ...\n", 19);
@@ -32,6 +32,7 @@ int		ini_data_and_img(t_env *e, char *file)
 	e->data->img->data = mlx_get_data_addr(e->data->img, &(e->data->img->bpp),
 			&(e->data->img->size_line), &(e->data->img->endian));
 	ini_texture(e);
+	ini_inv(e);
 	return (0);
 }
 
@@ -96,7 +97,6 @@ int		get_dim_map(char *file, t_env *e)
 	close(fd);
 	return (1);
 }
-
 
 int		ini_map(t_env *e, char *file)
 {
