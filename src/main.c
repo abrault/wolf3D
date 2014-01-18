@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:52:17 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/17 19:04:56 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/18 22:53:59 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,38 @@ void	mlx_pixel_put_to_image(t_env *e, t_point *draw)
 	int		i;
 	int		x;
 	int		y;
+	float	m;
 
 	i = 0;
 	x = draw->x * e->data->img->bpp / 8;
 	y = draw->y * e->data->img->size_line;
+	if (draw->red < 0)
+		draw->red = 255 - ft_abs(draw->red);
+	if (draw->green < 0)
+		draw->green = 255 - ft_abs(draw->green);
+	if (draw->blue < 0)
+		draw->blue = 255 - ft_abs(draw->blue);
+
+	if (draw->dist > 500)
+		m = 1;
+	else if (draw->dist > 470)
+		m = 0.9;
+	else if (draw->dist > 450)
+		m = 0.8;
+	else if (draw->dist > 400)
+		m = 0.7;
+	else if (draw->dist > 370)
+		m = 0.5;
+	else if (draw->dist > 350)
+		m = 0.3;
+	else
+		m = 0;
+	if (draw->dist > 0)
+	{
+		draw->red = draw->red * m;
+		draw->green = draw->green * m;
+		draw->blue = draw->blue * m;
+	}
 	e->data->img->data[x + i++ + y] = mlx_get_color_value(e->mlx, draw->blue);
 	e->data->img->data[x + i++ + y] = mlx_get_color_value(e->mlx, draw->green);
 	e->data->img->data[x + i++ + y] = mlx_get_color_value(e->mlx, draw->red);
@@ -38,10 +66,6 @@ int		key_hook(int keycode, t_env *e)
 		on_key_up(e);
 	else if (keycode == MLX_KEY_DOWN)
 		on_key_down(e);
-	else if (e->data->map[(int)(e->data->pos_y / SIZE_CASE + sin(ft_rad(
-			e->data->rot)))][(int)(e->data->pos_x / SIZE_CASE + cos(ft_rad(
-			e->data->rot)))] != 1)
-		special_key(e, keycode);
 	draw_image(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->data->img, 0, 0);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/06 17:26:27 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/17 18:30:16 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/18 22:45:08 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,14 @@ void		horizontal(t_env *e, int x, int first_y, int second_y)
 
 void		draw_background(t_env *e, float dist, int rayon)
 {
-	e->data->red = 90;
-	e->data->green = 183;
-	e->data->blue = 255;
+	e->data->red = 100;
+	e->data->green = 100;
+	e->data->blue = 100;
 	dist = (H_WIN - dist) / 2;
 	horizontal(e, rayon, 0, H_WIN / 2);
-	e->data->blue = 0;
+	e->data->red = 70;
+	e->data->green = 70;
+	e->data->blue = 70;
 	horizontal(e, rayon, H_WIN / 2, H_WIN);
 }
 
@@ -96,14 +98,11 @@ void		draw_image(t_env *e)
 	{
 		dist = find_dist(e, rayon);
 		dist = SIZE_CASE / dist * e->data->dist_ecran;
-		get_color(e);
 		if (dist != 0)
 		{
 			draw_background(e, dist, rayon);
-			/*horizontal(e, rayon, H_WIN / 2 - dist / 2, H_WIN / 2 + dist / 2);
-			*/cpy_img(e, rayon, dist, e->data->texture->id[e->data->id]);
+			cpy_img(e, rayon, dist, e->data->texture->id[e->data->id]);
 		}
 		rayon++;
 	}
-	draw_gui(e);
 }

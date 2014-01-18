@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/12 17:02:37 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/17 17:42:12 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/18 14:11:45 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,5 @@ float		ft_rad(float degre)
 
 float		ft_abs(float nbr)
 {
-	int		stock;
-
-	stock = nbr;
-	return ((nbr * nbr) / stock);
+	return (nbr < 0 ? -nbr : nbr);
 }
