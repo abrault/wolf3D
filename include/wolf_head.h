@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/02 13:53:00 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/18 22:45:04 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/19 18:15:59 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@
 # define MLX_KEY_SPACE			32
 # define MLX_KEY_CUBE_LEFT		49
 # define MLX_KEY_CUBE_RIGHT		52
-# define NB_TEXTURE				8
+# define NB_TEXTURE				15
+# define MAX_DISTANCE			150
+# define MIN_DISTANCE			600
 
 /*************************/
 /*        Typedef        */
@@ -70,7 +72,6 @@ typedef struct s_tempvar	t_tempvar;
 typedef struct				s_event_list
 {
 	int						mask;
-	int						(*hook)();
 	void					*param;
 }							t_event_list;
 
@@ -79,9 +80,6 @@ typedef struct				s_win_list
 	Window					window;
 	GC						gc;
 	struct s_win_list		*next;
-	int						(*mouse_hook)();
-	int						(*key_hook)();
-	int						(*expose_hook)();
 	void					*mouse_param;
 	void					*key_param;
 	void					*expose_param;
@@ -98,7 +96,6 @@ typedef struct				s_xvar
 	Colormap				cmap;
 	int						private_cmap;
 	t_win_list				*win_list;
-	int						(*loop_hook)();
 	void					*loop_param;
 	int						use_xshm;
 	int						pshm_format;
@@ -141,6 +138,8 @@ struct						s_data
 	t_texture				*texture;
 	int						item_select;
 	char					*inv;
+	char					in_batiment;
+	float					lum;
 };
 
 struct						s_env
@@ -183,7 +182,7 @@ int							on_key_up(t_env *e);
 int							on_key_down(t_env *e);
 int							on_key_left(t_env *e);
 int							on_key_right(t_env *e);
-int							special_key(t_env *e, int keycode);
+void						on_special_key(t_env *e, int keycode);
 
 /* Special Block */
 int							use_lever(t_env *e, int id);
@@ -207,12 +206,13 @@ int							ini_inv(t_env *e);
 
 /* Image */
 void						draw_image(t_env *e);
+void						draw_stage(t_env *e);
 void						mlx_pixel_put_to_image(t_env *e, t_point *draw);
-void						mlx_pixel_put_to_image_sec(t_env *e,
-		t_point *draw);
 void						get_color(t_env *e);
 t_img						*load_texture(t_env *e, char *file);
 void						cpy_img(t_env *e, int x, int dist, t_img *img);
+void						cpy_gui_img(t_env *e, t_img *img, int x, int y);
+void						cpy_sky(t_env *e, int x, int dist, t_img *img);
 void						cpy_all_img(t_env *e, t_img *img, int x, int y);
 void						draw_gui(t_env *e);
 void						cpy_block_i(t_env *e, int x, int dist, t_img *img);

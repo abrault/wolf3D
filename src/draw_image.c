@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/06 17:26:27 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/18 22:45:08 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/19 17:31:52 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void		draw_background(t_env *e, float dist, int rayon)
 	e->data->green = 100;
 	e->data->blue = 100;
 	dist = (H_WIN - dist) / 2;
-	horizontal(e, rayon, 0, H_WIN / 2);
+	if (e->data->map[0][0] == 1)
+		horizontal(e, rayon, 0, H_WIN / 2);
 	e->data->red = 70;
 	e->data->green = 70;
 	e->data->blue = 70;
@@ -101,6 +102,9 @@ void		draw_image(t_env *e)
 		if (dist != 0)
 		{
 			draw_background(e, dist, rayon);
+			if (e->data->map[0][0] == 0)
+				cpy_sky(e, rayon, H_WIN / 2 - dist / 2 + 1,
+						e->data->texture->id[8]);
 			cpy_img(e, rayon, dist, e->data->texture->id[e->data->id]);
 		}
 		rayon++;

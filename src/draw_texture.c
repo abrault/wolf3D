@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/14 16:50:42 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/18 22:45:47 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/19 15:29:45 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,32 @@ void	cpy_img(t_env *e, int x, int dist, t_img *img)
 		p.blue = img->data[e->data->col + i++ + y_img];
 		p.green = img->data[e->data->col + i++ + y_img];
 		p.red = img->data[e->data->col + i++ + y_img];
+		if (p.x >= 0 && p.x <= W_WIN && p.y >= 0 && p.y <= H_WIN)
+			mlx_pixel_put_to_image(e, &p);
+		p.y++;
+	}
+}
+
+void	cpy_sky(t_env *e, int x, int dist, t_img *img)
+{
+	t_point		p;
+	int			i;
+	int			y_img;
+
+	p.x = x;
+	p.dist = dist;
+	p.y = 0;
+	x = x * img->bpp / 8;
+	if (e->data->id == 0 || e->data->id > NB_TEXTURE)
+		e->data->id++;
+	p.dist = 400;
+	while (p.y < dist)
+	{
+		i = 0;
+		y_img = p.y * img->size_line;
+		p.blue = img->data[x + i++ + y_img];
+		p.green = img->data[x + i++ + y_img];
+		p.red = img->data[x + i++ + y_img];
 		if (p.x >= 0 && p.x <= W_WIN && p.y >= 0 && p.y <= H_WIN)
 			mlx_pixel_put_to_image(e, &p);
 		p.y++;

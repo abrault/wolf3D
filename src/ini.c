@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/12 12:19:22 by abrault           #+#    #+#             */
-/*   Updated: 2014/01/18 21:33:36 by abrault          ###   ########.fr       */
+/*   Updated: 2014/01/19 18:13:53 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,26 @@
 
 int		ini_data_and_img(t_env *e, char *file)
 {
-	e->data->pos_x = SIZE_CASE * 6;
-	e->data->pos_y = SIZE_CASE * 4;
 	e->data->rot = 90;
 	e->data->red = 0;
 	e->data->green = 0;
 	e->data->blue = 0;
 	e->data->item_select = 7;
+	e->data->lum = 1;
 	if (!get_dim_map(file, e))
 	{
 		write(1, "Incorrect file ...\n", 19);
 		exit(0);
 	}
+	e->data->pos_x = 2 * SIZE_CASE;
+	e->data->pos_y = 2 * SIZE_CASE;
 	ini_map(e, file);
+	e->data->in_batiment = e->data->map[0][0];
 	e->data->dist_ecran = W_WIN / 2 / tan(ft_rad(FOV / 2));
 	e->data->img = mlx_new_image(e->mlx, W_WIN, H_WIN);
 	e->data->img->data = mlx_get_data_addr(e->data->img, &(e->data->img->bpp),
 			&(e->data->img->size_line), &(e->data->img->endian));
 	ini_texture(e);
-	ini_inv(e);
 	return (0);
 }
 
@@ -45,6 +46,14 @@ void	ini_texture(t_env *e)
 	e->data->texture->id[5] = load_texture(e, "images/portebleu.xpm");
 	e->data->texture->id[6] = load_texture(e, "images/portecellule.xpm");
 	e->data->texture->id[7] = load_texture(e, "images/murbois.xpm");
+	e->data->texture->id[8] = load_texture(e, "images/sky.xpm");
+	e->data->texture->id[9] = load_texture(e, "images/skynight.xpm");
+	e->data->texture->id[10] = load_texture(e, "images/stageun.xpm");
+	e->data->texture->id[11] = load_texture(e, "images/leverup.xpm");
+	e->data->texture->id[12] = load_texture(e, "images/leverdown.xpm");
+	e->data->texture->id[13] = load_texture(e, "images/enterjour.xpm");
+	e->data->texture->id[14] = load_texture(e, "images/enter.xpm");
+	e->data->texture->id[15] = load_texture(e, "images/finish.xpm");
 }
 
 t_env	*ini_env(t_env *e)
